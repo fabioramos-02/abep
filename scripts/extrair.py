@@ -115,14 +115,18 @@ def main() -> None:
     assert (resumo["cheios"], resumo["parciais"], resumo["zerados"]) == (22, 15, 7), resumo
     assert abs(sum(d["pontos"] for d in dimensoes) - resumo["total"]) < 1e-6
 
-    SAIDA.write_text(
-        json.dumps(
+    # newline="
+" explicito: o JSON e versionado e o CI (Linux) precisa gerar bytes identicos
+    with SAIDA.open("w", encoding="utf-8", newline="
+") as f:
+        json.dump(
             {"resumo": resumo, "dimensoes": dimensoes, "indicadores": indicadores},
+            f,
             ensure_ascii=False,
             indent=2,
-        ),
-        encoding="utf-8",
-    )
+        )
+        f.write("
+")
     print(f"OK -> {SAIDA.relative_to(RAIZ)}  ({resumo['qtd']} indicadores, {resumo['total']:.2f}/100)")
 
 
