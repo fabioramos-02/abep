@@ -74,11 +74,19 @@ A seção 5 da análise (comparação com os demais estados) só existe se houve
 `Relatorio_Final_<UF>.xlsx` em `data/uf/`. Com a pasta vazia, `comparacaoNacional()` em
 `assets/analise.js` cai em `semDadoNacional()` e a seção aparece marcada como pendente — é o
 comportamento correto, não um bug. Não estimar, não inferir posição no ranking, não preencher com
-"provavelmente".
+"provavelmente". Hoje a pasta tem 26 UFs; falta o Paraná. `nacional.py` registra as ausentes em
+`nacional.ausentes`, a página declara a cobertura e calcula tudo sobre as presentes. Nunca
+extrapolar para 27.
 
-Se faltar alguma unidade federativa, `nacional.py` avisa e registra as ausentes em
-`nacional.ausentes`; a página declara a cobertura e calcula os percentuais só sobre as presentes.
-Nunca extrapolar para 27.
+**Média não substitui mediana neste dado.** A média nacional (69,32) é puxada para baixo por 8 UFs
+abaixo de 50 pontos. MS está acima da média e abaixo da mediana (78,32), em 15º de 26. Dizer só
+"acima da média" é verdadeiro e enganoso — todo texto sobre posição nacional cita mediana e
+colocação junto.
+
+**A leitura "é problema de MS ou do país?" usa dois sinais, não um.** `posicionamento` vem do terço
+em que MS cai naquele item; `item_dificil` marca item em que menos de 35% das UFs fizeram nota
+cheia. Classificar só pela fatia de zerados engana: no item 2.11 nenhuma UF zerou, mas 25 das 26
+ficaram parciais — não é fragilidade de MS.
 
 Mesma regra para o item 4.5: classificado como "Evidência Comprovada" com pontuação 0. A divergência
 é da fonte e fica explícita na página, não silenciada.

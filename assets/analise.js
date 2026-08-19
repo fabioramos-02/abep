@@ -291,10 +291,10 @@ function responsabilidade(dados) {
 
 /* ---------------- 5. Comparacao nacional ---------------- */
 
-const DIFICULDADE = {
-  especifica: 'Fragilidade específica de MS',
-  disseminada: 'Dificuldade disseminada',
-  comum: 'Dificuldade comum ao país',
+const POSICIONAMENTO = {
+  atras: 'MS atrás da maioria',
+  meio: 'MS no meio do grupo',
+  frente: 'MS entre os melhores',
 };
 
 const ord = (n) => `${n}º`;
@@ -323,27 +323,33 @@ function comparacaoNacional(dados) {
   const m = nac.ms;
   const falhos = nac.indicadores
     .filter((i) => i.ms_status !== 'cheio')
-    .sort((a, b) => a.ms_vs_media - b.ms_vs_media);
-  const especificas = falhos.filter((i) => i.dificuldade === 'especifica');
-  const comuns = falhos.filter((i) => i.dificuldade === 'comum');
+    .sort((a, b) => b.posicao - a.posicao || a.codigo.localeCompare(b.codigo));
+  const atras = falhos.filter((i) => i.posicionamento === 'atras');
+  const dificeis = falhos.filter((i) => i.item_dificil);
 
+  /* A media nacional e puxada para baixo por um grupo de UFs com nota muito baixa.
+     Reportar so a media faria MS parecer melhor colocado do que esta - a mediana e a
+     posicao no ranking contam a historia correta e andam juntas em todo o texto. */
   document.getElementById('anchor-nacional').innerHTML =
-    `Entre as ${nac.qtd_ufs} unidades federativas avaliadas, MS ficou em <strong>${ord(m.posicao)} lugar</strong> ` +
-    `com ${nf(m.total, 2)} pontos — <strong>${m.acima_da_media ? 'acima' : 'abaixo'} da média nacional</strong> ` +
-    `de ${nf(nac.media_nacional, 2)}, diferença de ${nf(Math.abs(m.vs_media), 2)} pontos. ` +
-    `A melhor colocada é ${esc(nac.melhor.uf)}, com ${nf(nac.melhor.total, 2)}.`;
+    `MS ficou em <strong>${ord(m.posicao)} lugar entre as ${nac.qtd_ufs} unidades federativas</strong> ` +
+    `com ${nf(m.total, 2)} pontos. Está ${nf(Math.abs(m.vs_media), 2)} ponto${Math.abs(m.vs_media) >= 2 ? 's' : ''} ` +
+    `${m.acima_da_media ? 'acima' : 'abaixo'} da média (${nf(nac.media_nacional, 2)}), mas ` +
+    `<strong>${nf(Math.abs(m.vs_mediana), 2)} ${m.acima_da_mediana ? 'acima' : 'abaixo'} da mediana</strong> ` +
+    `(${nf(nac.mediana_nacional, 2)}) — a média está puxada para baixo por ${nac.abaixo_de_50.length} ` +
+    `unidades federativas que não chegaram a 50 pontos. A leitura honesta é a posição: ` +
+    `<strong>MS está na metade de baixo do país</strong>. A líder é ${esc(nac.melhor.uf)}, com ` +
+    `${nf(nac.melhor.total, 2)}.`;
 
   document.getElementById('kpis-nacional').innerHTML = [
     { label: 'Posição de MS', valor: ord(m.posicao), sufixo: ` de ${nac.qtd_ufs}`,
-      classe: m.posicao <= nac.qtd_ufs / 3 ? 'is-good' : '',
-      hint: `Melhor colocada: ${nac.melhor.uf} com ${nf(nac.melhor.total, 2)}.` },
+      classe: m.posicao <= nac.qtd_ufs / 3 ? 'is-good' : 'is-bad',
+      hint: `Líder: ${nac.melhor.uf} com ${nf(nac.melhor.total, 2)} pontos.` },
+    { label: 'Mediana nacional', valor: nf(nac.mediana_nacional, 2), sufixo: ' de 100',
+      classe: '', hint: `MS está ${sinal(m.vs_mediana)} em relação a ela.` },
     { label: 'Média nacional', valor: nf(nac.media_nacional, 2), sufixo: ' de 100', classe: '',
-      hint: `Mediana ${nf(nac.mediana_nacional, 2)} · menor nota ${nf(nac.pior.total, 2)} (${nac.pior.uf}).` },
-    { label: 'MS em relação à média', valor: sinal(m.vs_media), sufixo: ' pts',
-      classe: m.acima_da_media ? 'is-good' : 'is-bad',
-      hint: m.acima_da_media ? 'Acima da média nacional.' : 'Abaixo da média nacional.' },
-    { label: 'Fragilidades só de MS', valor: String(especificas.length), sufixo: ` de ${falhos.length}`,
-      classe: 'is-bad', hint: 'Itens em que MS falhou e a maioria das UFs pontuou.' },
+      hint: `Puxada por ${nac.abaixo_de_50.length} UFs abaixo de 50 pontos.` },
+    { label: 'Itens atrás da maioria', valor: String(atras.length), sufixo: ` de ${falhos.length}`,
+      classe: 'is-bad', hint: 'Itens em que dois terços das UFs pontuaram mais que MS.' },
   ].map((k) => `
     <article class="kpi ${k.classe}">
       <p class="label">${k.label}</p>
@@ -361,7 +367,7 @@ function comparacaoNacional(dados) {
     maximo: 100,
     cor: COR.primaria,
     formata: (v) => nf(v, 2),
-    referencia: { valor: nac.media_nacional, rotulo: `média nacional ${nf(nac.media_nacional, 2)}` },
+    referencia: { valor: nac.mediana_nacional, rotulo: `mediana ${nf(nac.mediana_nacional, 2)}` },
     aria: `Ranking das ${nac.qtd_ufs} unidades federativas por nota final: ` +
       nac.ranking.map((r) => `${ord(r.posicao)} ${r.uf}, ${nf(r.total, 2)}`).join('; ') + '.',
   });
@@ -380,23 +386,28 @@ function comparacaoNacional(dados) {
   }).join('');
 
   document.getElementById('anchor-dificuldade').innerHTML =
-    `Dos ${falhos.length} itens em que MS não pontuou por inteiro, <strong>${especificas.length} são fragilidade ` +
-    `própria</strong>: menos de ${pct(nac.limites.disseminada)} das unidades federativas zeraram, ou seja, ` +
-    `a maioria conseguiu e MS não. Outros ${comuns.length} são <strong>dificuldade comum ao país</strong>, ` +
-    `com pelo menos ${pct(nac.limites.comum)} das UFs zerando o mesmo item — ali o obstáculo é do estágio ` +
-    `nacional, não de MS isoladamente.`;
+    `Dos ${falhos.length} itens em que MS não fez nota cheia, <strong>${atras.length} têm MS atrás da ` +
+    `maioria</strong> — dois terços das unidades federativas pontuaram mais: ` +
+    `${atras.map((i) => esc(i.codigo)).join(', ')}. Esses são fragilidade própria, não do país. ` +
+    `Na outra ponta, <strong>${dificeis.length} itens são difíceis para todo mundo</strong>: menos de ` +
+    `${pct(nac.limites.item_dificil)} das UFs conseguiram nota cheia neles — ali MS acompanha o conjunto ` +
+    `e o ganho por esforço é menor.`;
 
   const corpo = document.getElementById('tab-nacional-ind');
   corpo.innerHTML = falhos.map((i) => `
-    <tr data-dificuldade="${i.dificuldade}">
+    <tr data-posicionamento="${i.posicionamento}">
       <td class="code">${esc(i.codigo)}</td>
       <td>${esc(rotuloDim(i.dimensao, nomes[i.dimensao]))}</td>
       <td><span class="tag tag-${i.ms_status}">${i.ms_status === 'zerado' ? 'Zerado' : 'Parcial'}</span></td>
       <td class="n">${i.zerados} <small>(${pct(i.share_zerado)})</small></td>
       <td class="n">${i.parciais}</td>
-      <td class="n">${i.cheios}</td>
-      <td class="n"><span class="delta ${i.ms_vs_media >= 0 ? 'up' : 'down'}">${sinal(i.ms_vs_media)}</span></td>
-      <td><span class="marca marca-${i.dificuldade}">${DIFICULDADE[i.dificuldade]}</span></td>
+      <td class="n">${i.cheios} <small>(${pct(i.share_cheio)})</small></td>
+      <td class="n">${ord(i.posicao)} <small>de ${i.qtd_ufs}</small><br>
+        <span class="delta ${i.ms_vs_media >= 0 ? 'up' : 'down'}">${sinal(i.ms_vs_media)} vs média</span></td>
+      <td>
+        <span class="marca marca-${i.posicionamento}">${POSICIONAMENTO[i.posicionamento]}</span>
+        ${i.item_dificil ? '<span class="marca marca-dificil">Item difícil para todos</span>' : ''}
+      </td>
     </tr>`).join('');
 
   const filtro = document.getElementById('f-dificuldade');
@@ -404,7 +415,8 @@ function comparacaoNacional(dados) {
   function aplicar() {
     let vis = 0;
     falhos.forEach((i, idx) => {
-      const ok = !filtro.value || i.dificuldade === filtro.value;
+      const ok = !filtro.value
+        || (filtro.value === 'dificil' ? i.item_dificil : i.posicionamento === filtro.value);
       corpo.children[idx].hidden = !ok;
       if (ok) vis += 1;
     });
@@ -414,18 +426,70 @@ function comparacaoNacional(dados) {
   aplicar();
 
   document.getElementById('nota-nacional').innerHTML =
-    `<strong>Como a leitura é classificada:</strong> a fatia considerada é o percentual de unidades federativas
-     que zeraram o mesmo item. Até ${pct(nac.limites.disseminada)} é <em>fragilidade específica de MS</em> —
-     a maioria pontuou e MS não. De ${pct(nac.limites.disseminada)} a ${pct(nac.limites.comum)} é
-     <em>dificuldade disseminada</em>. De ${pct(nac.limites.comum)} para cima é
-     <em>dificuldade comum ao país</em>. Os cortes são desta análise, não da avaliação.` +
+    `<strong>Como ler as duas marcas:</strong> a primeira vem da posição de MS naquele item —
+     terço superior é <em>entre os melhores</em>, terço inferior é <em>atrás da maioria</em>. A segunda
+     aparece quando menos de ${pct(nac.limites.item_dificil)} das unidades federativas fizeram nota cheia:
+     o obstáculo é do conjunto, não de MS. Classificar só pela fatia de zerados enganaria — no item 2.11
+     nenhuma UF zerou, mas ${nac.indicadores.find((x) => x.codigo === '2.11').parciais} das
+     ${nac.qtd_ufs} ficaram parciais. Os cortes são desta análise, não da avaliação.` +
     (nac.ausentes.length
       ? ` <strong>Cobertura:</strong> ${nac.qtd_ufs} das 27 unidades federativas. Sem relatório na base:
-         ${nac.ausentes.map(esc).join(', ')} — os percentuais desta seção são sobre as ${nac.qtd_ufs} presentes.`
+         ${nac.ausentes.map(esc).join(', ')} — todo percentual desta seção é sobre as ${nac.qtd_ufs} presentes.`
       : '');
 }
 
 /* ---------------- 6. Achados ---------------- */
+
+/* O ultimo bloco muda conforme os relatorios das outras UFs estejam ou nao na base. */
+function blocoNacional(dados, rot) {
+  const nac = dados.nacional;
+  if (!nac) {
+    return {
+      tipo: 'lacuna',
+      titulo: 'O que esta análise ainda não responde',
+      itens: [
+        `Se MS está <strong>acima ou abaixo do resto do país</strong> em cada item — depende dos
+         relatórios das demais unidades federativas, ainda não disponíveis.`,
+        `Se os itens zerados são <strong>dificuldade comum entre os estados</strong> ou fragilidade própria.
+         Sem essa leitura, um zero em política de IA e um zero em certificado de ensino médio parecem
+         igualmente graves — e provavelmente não são.`,
+      ],
+    };
+  }
+
+  const falhos = nac.indicadores.filter((i) => i.ms_status !== 'cheio');
+  const atras = falhos.filter((i) => i.posicionamento === 'atras');
+  const dificeis = falhos.filter((i) => i.item_dificil);
+  const dimAbaixo = nac.dimensoes.filter((d) => !d.acima_da_media);
+  const nomes = Object.fromEntries(dados.dimensoes.map((d) => [d.numero, d.nome]));
+
+  return {
+    tipo: 'nacional',
+    titulo: 'MS diante dos demais estados',
+    itens: [
+      `MS é o <strong>${ord(nac.ms.posicao)} colocado entre ${nac.qtd_ufs} unidades federativas</strong>.
+       Fica acima da média (${nf(nac.media_nacional, 2)}) mas <strong>abaixo da mediana</strong>
+       (${nf(nac.mediana_nacional, 2)}): a média só é baixa porque ${nac.abaixo_de_50.length} estados
+       não chegaram a 50 pontos. Estar acima da média não significa estar bem colocado.`,
+      `<strong>${atras.length} itens são fragilidade própria</strong> — dois terços das UFs pontuaram mais
+       que MS: ${atras.map((i) => `<strong>${esc(i.codigo)}</strong> (${esc(rot(i.dimensao))})`).join(', ')}.
+       São os que mais destoam do país.`,
+      `<strong>${dificeis.length} itens são difíceis para todos</strong> — menos de
+       ${pct(nac.limites.item_dificil)} das UFs fizeram nota cheia neles. Aqui MS acompanha o conjunto,
+       e cobrar a secretaria responsável rende menos que nos itens acima.`,
+      dimAbaixo.length
+        ? `MS está abaixo da média nacional em ${dimAbaixo.length} das 5 dimensões:
+           ${dimAbaixo.map((d) => `<strong>${esc(rotuloDim(d.numero, nomes[d.numero]))}</strong>
+           (${pct(d.ms)} contra ${pct(d.media)})`).join(', ')}.`
+        : `MS está acima da média nacional em todas as 5 dimensões.`,
+      nac.ausentes.length
+        ? `Cobertura: ${nac.qtd_ufs} das 27 unidades federativas — ${nac.ausentes.join(', ')} sem relatório
+           na base. Todo percentual é sobre as ${nac.qtd_ufs} presentes.`
+        : `Cobertura completa: as 27 unidades federativas entraram no cruzamento.`,
+    ],
+  };
+}
+
 
 function achados(dados) {
   const { resumo, dimensoes, indicadores, responsaveis } = dados;
@@ -491,17 +555,7 @@ function achados(dados) {
           pct(responsaveis[0].perda / resumo.perda)} de toda a perda com um único interlocutor.`,
       ],
     },
-    {
-      tipo: 'lacuna',
-      titulo: 'O que esta análise ainda não responde',
-      itens: [
-        `Se MS está <strong>acima ou abaixo da média nacional</strong> em cada item — depende da planilha
-         consolidada das 27 unidades federativas, ainda não disponível.`,
-        `Se os itens zerados são <strong>dificuldade comum entre os estados</strong> ou fragilidade específica de MS.
-         Sem essa leitura, um zero em política de IA e um zero em certificado de ensino médio parecem igualmente
-         graves — e provavelmente não são.`,
-      ],
-    },
+    blocoNacional(dados, rot),
   ];
 
   document.getElementById('achados').innerHTML = blocos.map((b) => `

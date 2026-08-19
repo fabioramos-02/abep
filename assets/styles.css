@@ -419,7 +419,9 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
   display: inline-block; padding: 2px 8px; border-radius: var(--radius-btn);
   font-size: 12px; font-weight: 700; white-space: nowrap;
 }
-.marca-especifica { background: #F6D3D5; color: #540F12; }
-.marca-disseminada { background: #FFE0CC; color: #331A09; }
-.marca-comum { background: var(--bg-subtle); color: var(--content-secondary); }
+.marca-atras { background: #F6D3D5; color: #540F12; }
+.marca-meio { background: var(--bg-subtle); color: var(--content-secondary); }
+.marca-frente { background: #D0E8D6; color: #08210F; }
+.marca-dificil { background: #CDEBFF; color: #011F33; margin-top: 4px; }
 #tab-nacional-ind tr[hidden] { display: none; }
+.achado-nacional { border-top-color: var(--info); }

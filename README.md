@@ -9,7 +9,26 @@ Duas páginas:
 | Página | Para quem | O que responde |
 |--------|-----------|----------------|
 | **[Painel](https://fabioramos-02.github.io/abep/)** | leitura rápida | quanto tiramos, onde perdemos, o que zeramos |
-| **[Análise executiva](https://fabioramos-02.github.io/abep/analise.html)** | gestão e pontos focais | situação item a item, justificativa da avaliação, responsabilidade por órgão, prioridades de recuperação |
+| **[Análise executiva](https://fabioramos-02.github.io/abep/analise.html)** | gestão e pontos focais | situação item a item, justificativa da avaliação, responsabilidade por órgão, posição de MS entre os estados, prioridades de recuperação |
+
+### MS diante dos demais estados
+
+**15º lugar entre 26 unidades federativas**, com 74,81 pontos. Acima da média nacional (69,32) e
+**abaixo da mediana** (78,32) — a média é baixa porque 8 estados não chegaram a 50 pontos. A leitura
+que vale é a posição: MS está na metade de baixo. A líder é PI, com 100,00.
+
+Abaixo da média nacional em 3 das 5 dimensões: Governança Digital, Usuários e Cidadãos, Inovação e IA.
+
+**3 itens são fragilidade própria** — dois terços dos estados pontuaram mais que MS:
+
+| Item | Dimensão | Tema | Posição de MS |
+|------|----------|------|---------------|
+| 1.6 | Governança Digital | Framework de interoperabilidade | 19º de 26 |
+| 4.6 | Usuários e Cidadãos | Alfabetização digital | 20º de 26 |
+| 5.3 | Inovação e IA | Compras públicas para inovação | 19º de 26 |
+
+**7 itens são difíceis para todos** — menos de 35% dos estados fizeram nota cheia neles. Ali MS
+acompanha o conjunto e cobrar a secretaria rende menos.
 
 ---
 
@@ -120,11 +139,12 @@ declarados como CSS custom properties no topo de `assets/styles.css`.
 transcrito do registro interno de acompanhamento do ciclo mantido pela equipe da SETDIG. Esse
 registro vive fora deste repositório e não acompanha a planilha, por isso foi versionado aqui.
 
-**Comparativo entre unidades federativas:** os arquivos `Relatorio_Final_<UF>.xlsx` em `data/uf/`.
-Se a pasta estiver vazia, a seção 5 da análise aparece marcada como pendente de dado — nada é
+**Comparativo entre unidades federativas:** os 26 arquivos `Relatorio_Final_<UF>.xlsx` em `data/uf/`.
+Falta o Paraná — todo percentual da seção 5 é calculado sobre as 26 presentes, e a cobertura aparece
+na própria página. Com a pasta vazia, a seção volta a aparecer marcada como pendente de dado; nada é
 estimado nem preenchido por inferência.
 
-### Ligar o comparativo nacional
+### Atualizar o comparativo nacional
 
 ```bash
 cp /caminho/dos/relatorios/Relatorio_Final_*.xlsx data/uf/
@@ -133,5 +153,8 @@ python scripts/analise.py
 ```
 
 `nacional.py` valida o cabeçalho de cada arquivo, recusa UF duplicada, confere que o total de MS bate
-com o resultado já publicado e avisa quais unidades federativas ficaram de fora. Todos os percentuais
-da seção são calculados sobre as UFs presentes, e a cobertura aparece na própria página.
+com o resultado já publicado e avisa quais unidades federativas ficaram de fora.
+
+Dois detalhes do formato recebido, tratados no script: parte dos arquivos referencia um desenho
+inexistente no pacote (o openpyxl quebra ao carregar imagens, então a busca por elas é neutralizada),
+e vários declaram `<dimension ref="A1"/>`, o que inviabiliza o modo `read_only`.

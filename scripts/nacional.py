@@ -16,19 +16,30 @@ from pathlib import Path
 from statistics import mean, median
 
 import openpyxl
+import openpyxl.reader.excel
+
+# Varios relatorios estaduais trazem rels apontando para um xl/drawings/drawing1.xml que
+# nao existe no pacote, e o openpyxl estoura KeyError ao tentar carregar a imagem. Nada
+# aqui le imagem, entao a busca por elas e neutralizada na entrada.
+openpyxl.reader.excel.find_images = lambda *_a, **_k: ([], [])
 
 RAIZ = Path(__file__).resolve().parent.parent
 PADRAO = RAIZ / "data" / "uf"
 SAIDA = RAIZ / "data" / "nacional.json"
 FOCO = "MS"
 
+# Colunas obrigatorias. Alguns arquivos trazem "Atendido" e "percentual" depois destas;
+# nada aqui depende delas - o status e recalculado a partir de pontos e maximo.
 CABECALHO = ["UF", "Dimensão", "Indicador", "Classificação recebida",
-             "Pontuação recebida", "Valor do indicador", "Atendido", "percentual"]
+             "Pontuação recebida", "Valor do indicador"]
 
-# Fatia de UFs que zeraram o item. Acima do limite alto a dificuldade e do pais,
-# abaixo do limite baixo o problema e de quem zerou.
-LIMITE_COMUM = 0.50
-LIMITE_DISSEMINADA = 0.25
+# Um item so responde "e problema de MS ou do pais?" com duas leituras separadas:
+#   posicao de MS no item  -> MS esta atras ou na frente das outras UFs
+#   fatia de UFs com nota cheia -> o item e dificil para todo mundo
+# Classificar so pela fatia de zerados engana: em 2.11 nenhuma UF zerou, mas 25 das 26
+# ficaram parciais - nao e fragilidade de MS, e dificuldade geral.
+TERCO = 1 / 3
+LIMITE_ITEM_DIFICIL = 0.35  # menos de 35% das UFs com nota cheia = obstaculo do conjunto
 
 
 def classifica(pontos: float, maximo: float) -> str:
@@ -41,15 +52,17 @@ def classifica(pontos: float, maximo: float) -> str:
 
 def le_uf(caminho: Path) -> tuple[str, list[dict]]:
     """Le um relatorio estadual. Devolve a sigla e as linhas normalizadas."""
+    # Modo normal de proposito: varios arquivos declaram <dimension ref="A1"/>, e o modo
+    # read_only confia nesse metadado e devolveria uma linha so.
     wb = openpyxl.load_workbook(caminho, data_only=True)
     ws = wb["Relatorio"] if "Relatorio" in wb.sheetnames else wb.worksheets[0]
     linhas = list(ws.iter_rows(values_only=True))
 
     cabecalho = [str(c).strip() if c is not None else "" for c in linhas[0]]
-    if cabecalho[:8] != CABECALHO:
+    if cabecalho[:len(CABECALHO)] != CABECALHO:
         raise SystemExit(
             f"{caminho.name}: cabecalho diferente do esperado.\n"
-            f"  esperado: {CABECALHO}\n  encontrado: {cabecalho[:8]}"
+            f"  esperado: {CABECALHO}\n  encontrado: {cabecalho}"
         )
 
     itens = []
@@ -62,7 +75,8 @@ def le_uf(caminho: Path) -> tuple[str, list[dict]]:
             raise SystemExit(f"{caminho.name}: codigo inesperado em {texto!r}")
         itens.append({
             "uf": str(uf).strip().upper(),
-            "dimensao": str(dim).strip(),
+            # A dimensao vem ora como 1, ora como 1.0, conforme o arquivo.
+            "dimensao": str(int(float(dim))),
             "codigo": codigo,
             "pontos": pontos,
             "maximo": maximo,
@@ -148,13 +162,15 @@ def main() -> None:
         parciais = [u for u in presentes if linha[u]["status"] == "parcial"]
         cheios = [u for u in presentes if linha[u]["status"] == "cheio"]
         share_zerado = len(zeradas) / len(presentes)
+        share_cheio = len(cheios) / len(presentes)
+        pos = posicao(i_ms["pontos"], pontos)
 
-        if share_zerado >= LIMITE_COMUM:
-            dificuldade = "comum"
-        elif share_zerado >= LIMITE_DISSEMINADA:
-            dificuldade = "disseminada"
+        if pos <= len(presentes) * TERCO:
+            posicionamento = "frente"
+        elif pos <= len(presentes) * 2 * TERCO:
+            posicionamento = "meio"
         else:
-            dificuldade = "especifica"
+            posicionamento = "atras"
 
         indicadores.append({
             "codigo": cod,
@@ -167,11 +183,13 @@ def main() -> None:
             "parciais": len(parciais),
             "cheios": len(cheios),
             "share_zerado": round(share_zerado, 4),
+            "share_cheio": round(share_cheio, 4),
             "media": round(mean(pontos), 4),
             "mediana": round(median(pontos), 4),
             "ms_vs_media": round(i_ms["pontos"] - mean(pontos), 4),
-            "posicao": posicao(i_ms["pontos"], pontos),
-            "dificuldade": dificuldade,
+            "posicao": pos,
+            "posicionamento": posicionamento,
+            "item_dificil": share_cheio < LIMITE_ITEM_DIFICIL,
             "ufs_zeradas": zeradas,
         })
 
@@ -189,12 +207,17 @@ def main() -> None:
             "total": ms_total,
             "posicao": posicao(ms_total, valores),
             "vs_media": round(ms_total - mean(valores), 4),
+            "vs_mediana": round(ms_total - median(valores), 4),
             "acima_da_media": ms_total > mean(valores),
+            "acima_da_mediana": ms_total > median(valores),
         },
+        # A media nacional e puxada para baixo por poucas UFs com nota muito baixa. Dizer
+        # so "acima da media" mascara a posicao real, por isso a mediana anda junto.
+        "abaixo_de_50": sorted(uf for uf, t in totais.items() if t < 50),
         "ranking": ranking,
         "dimensoes": dimensoes,
         "indicadores": indicadores,
-        "limites": {"comum": LIMITE_COMUM, "disseminada": LIMITE_DISSEMINADA},
+        "limites": {"terco": round(TERCO, 4), "item_dificil": LIMITE_ITEM_DIFICIL},
     }
 
     # Self-check: o cruzamento precisa bater com o resultado de MS ja publicado.
