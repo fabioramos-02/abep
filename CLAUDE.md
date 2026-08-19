@@ -28,11 +28,11 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
 2. **Design System MS.GOV é obrigatório.** Toda cor sai das CSS custom properties no `:root` de
    `assets/styles.css`. Zero hex solto no meio do CSS ou em `style=` inline que não venha de token.
    Azul institucional `#004F9F`; títulos Open Sans; corpo Roboto.
-3. **Os dois JSON são gerados, não editados à mão.** `indicadores.json` vem do
-   `Relatorio_Final_MS.xlsx` via `scripts/extrair.py`; `analise.json` cruza esse resultado com
-   `data/contexto.json` via `scripts/analise.py` — nessa ordem. O único arquivo de dado editável à
-   mão é `contexto.json`, que carrega órgão responsável, situação de envio e justificativa da
-   avaliação por item, transcritos do registro interno da equipe.
+3. **Os JSON são gerados, não editados à mão.** Ordem: `extrair.py` (xlsx de MS →
+   `indicadores.json`) → `nacional.py` (`data/uf/*.xlsx` → `nacional.json`, opcional) →
+   `analise.py` (junta tudo → `analise.json`). O único arquivo de dado editável à mão é
+   `contexto.json`, que carrega órgão responsável, situação de envio e justificativa da avaliação
+   por item, transcritos do registro interno da equipe.
 4. **Os `assert` nos dois scripts são o teste do repo.** `extrair.py` trava total 74,809 / 44 itens
    / 22-15-7. `analise.py` trava que todos os recortes fecham com o total: soma por dimensão, soma
    por órgão (com perda rateada em itens compartilhados), 5 não enviados e 1 comprovado sem
@@ -70,11 +70,15 @@ Fonte do Pages configurada como **GitHub Actions** nas Settings do repositório.
 
 ## Regra sobre o que não se sabe
 
-A seção 5 da análise (comparação com os demais estados) está marcada como **pendente de dado** porque
-a planilha disponível traz só as linhas de MS. Não estimar, não inferir posição no ranking, não
-preencher com "provavelmente". Quando o relatório consolidado das 27 UFs chegar, ele entra como
-`dados.nacional` em `analise.json` e `comparacaoNacional()` em `assets/analise.js` passa a renderizar
-o cruzamento — o resto da página não muda.
+A seção 5 da análise (comparação com os demais estados) só existe se houver
+`Relatorio_Final_<UF>.xlsx` em `data/uf/`. Com a pasta vazia, `comparacaoNacional()` em
+`assets/analise.js` cai em `semDadoNacional()` e a seção aparece marcada como pendente — é o
+comportamento correto, não um bug. Não estimar, não inferir posição no ranking, não preencher com
+"provavelmente".
+
+Se faltar alguma unidade federativa, `nacional.py` avisa e registra as ausentes em
+`nacional.ausentes`; a página declara a cobertura e calcula os percentuais só sobre as presentes.
+Nunca extrapolar para 27.
 
 Mesma regra para o item 4.5: classificado como "Evidência Comprovada" com pontuação 0. A divergência
 é da fonte e fica explícita na página, não silenciada.

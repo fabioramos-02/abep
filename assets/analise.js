@@ -291,21 +291,138 @@ function responsabilidade(dados) {
 
 /* ---------------- 5. Comparacao nacional ---------------- */
 
-function comparacaoNacional(dados) {
-  if (dados.nacional) return; // preenchido quando a planilha das 27 UFs entrar na base
+const DIFICULDADE = {
+  especifica: 'Fragilidade específica de MS',
+  disseminada: 'Dificuldade disseminada',
+  comum: 'Dificuldade comum ao país',
+};
 
+const ord = (n) => `${n}º`;
+const sinal = (v, casas = 2) => (v >= 0 ? '+' : '−') + nf(Math.abs(v), casas);
+
+function semDadoNacional() {
+  const lacuna = document.getElementById('lacuna');
+  lacuna.hidden = false;
   document.getElementById('h5').textContent = 'Comparação com os demais estados — pendente de dado';
-  document.getElementById('lacuna').innerHTML = `
-    <p><strong>Esta seção não foi produzida porque o dado não existe na base disponível.</strong></p>
-    <p>A planilha usada nesta análise traz apenas as linhas de Mato Grosso do Sul: 44 exigências, uma coluna de
-      unidade federativa preenchida com “MS” em todas elas. Não há registro dos demais estados, nem média nacional,
-      nem posição de MS no conjunto.</p>
-    <p>Para responder ao que foi pedido — quantos estados zeraram cada item, quantos pontuaram parcialmente,
-      se a dificuldade é comum ou específica de MS — é preciso o <strong>relatório consolidado do ciclo 2026 com as
-      27 unidades federativas</strong>, no mesmo formato item a item. Com esse arquivo, o cruzamento entra aqui
-      sem mudar nenhuma outra seção.</p>
-    <p class="lacuna-acao">Enquanto o arquivo não chega, os itens zerados e parciais de MS estão listados na
+  lacuna.innerHTML = `
+    <p><strong>Esta seção não foi produzida porque o dado não está na base.</strong></p>
+    <p>A comparação depende dos relatórios finais das demais unidades federativas, no mesmo formato
+      item a item. Coloque os arquivos <code>Relatorio_Final_&lt;UF&gt;.xlsx</code> em
+      <code>data/uf/</code> e rode <code>python scripts/nacional.py</code> seguido de
+      <code>python scripts/analise.py</code>: esta seção passa a ser gerada sozinha e nenhuma outra muda.</p>
+    <p class="lacuna-acao">Enquanto isso, os itens zerados e parciais de MS estão listados na
       <a href="#s3">seção 3</a>, prontos para o cruzamento.</p>`;
+}
+
+function comparacaoNacional(dados) {
+  const nac = dados.nacional;
+  if (!nac) return semDadoNacional();
+
+  document.getElementById('bloco-nacional').hidden = false;
+  const nomes = Object.fromEntries(dados.dimensoes.map((d) => [d.numero, d.nome]));
+  const m = nac.ms;
+  const falhos = nac.indicadores
+    .filter((i) => i.ms_status !== 'cheio')
+    .sort((a, b) => a.ms_vs_media - b.ms_vs_media);
+  const especificas = falhos.filter((i) => i.dificuldade === 'especifica');
+  const comuns = falhos.filter((i) => i.dificuldade === 'comum');
+
+  document.getElementById('anchor-nacional').innerHTML =
+    `Entre as ${nac.qtd_ufs} unidades federativas avaliadas, MS ficou em <strong>${ord(m.posicao)} lugar</strong> ` +
+    `com ${nf(m.total, 2)} pontos — <strong>${m.acima_da_media ? 'acima' : 'abaixo'} da média nacional</strong> ` +
+    `de ${nf(nac.media_nacional, 2)}, diferença de ${nf(Math.abs(m.vs_media), 2)} pontos. ` +
+    `A melhor colocada é ${esc(nac.melhor.uf)}, com ${nf(nac.melhor.total, 2)}.`;
+
+  document.getElementById('kpis-nacional').innerHTML = [
+    { label: 'Posição de MS', valor: ord(m.posicao), sufixo: ` de ${nac.qtd_ufs}`,
+      classe: m.posicao <= nac.qtd_ufs / 3 ? 'is-good' : '',
+      hint: `Melhor colocada: ${nac.melhor.uf} com ${nf(nac.melhor.total, 2)}.` },
+    { label: 'Média nacional', valor: nf(nac.media_nacional, 2), sufixo: ' de 100', classe: '',
+      hint: `Mediana ${nf(nac.mediana_nacional, 2)} · menor nota ${nf(nac.pior.total, 2)} (${nac.pior.uf}).` },
+    { label: 'MS em relação à média', valor: sinal(m.vs_media), sufixo: ' pts',
+      classe: m.acima_da_media ? 'is-good' : 'is-bad',
+      hint: m.acima_da_media ? 'Acima da média nacional.' : 'Abaixo da média nacional.' },
+    { label: 'Fragilidades só de MS', valor: String(especificas.length), sufixo: ` de ${falhos.length}`,
+      classe: 'is-bad', hint: 'Itens em que MS falhou e a maioria das UFs pontuou.' },
+  ].map((k) => `
+    <article class="kpi ${k.classe}">
+      <p class="label">${k.label}</p>
+      <span class="num">${k.valor}<small>${k.sufixo}</small></span>
+      <p class="hint">${esc(k.hint)}</p>
+    </article>`).join('');
+
+  document.getElementById('chart-ranking').innerHTML = barras({
+    itens: nac.ranking.map((r) => ({
+      rotulo: `${ord(r.posicao)}   ${r.uf}`,
+      detalhe: r.uf === nac.uf_foco ? 'Mato Grosso do Sul' : '',
+      valor: r.total,
+      cor: r.uf === nac.uf_foco ? COR.primaria : '#A9AEB1',
+    })),
+    maximo: 100,
+    cor: COR.primaria,
+    formata: (v) => nf(v, 2),
+    referencia: { valor: nac.media_nacional, rotulo: `média nacional ${nf(nac.media_nacional, 2)}` },
+    aria: `Ranking das ${nac.qtd_ufs} unidades federativas por nota final: ` +
+      nac.ranking.map((r) => `${ord(r.posicao)} ${r.uf}, ${nf(r.total, 2)}`).join('; ') + '.',
+  });
+
+  document.getElementById('tab-nacional-dim').innerHTML = nac.dimensoes.map((d) => {
+    const dif = d.ms - d.media;
+    return `
+    <tr>
+      <th scope="row">${esc(rotuloDim(d.numero, nomes[d.numero]))}</th>
+      <td class="n">${pct(d.ms)}</td>
+      <td class="n">${pct(d.media)}</td>
+      <td class="n"><span class="delta ${dif >= 0 ? 'up' : 'down'}">${dif >= 0 ? '+' : '−'}${pct(Math.abs(dif))}</span></td>
+      <td class="n">${ord(d.posicao)} de ${nac.qtd_ufs}</td>
+      <td>${esc(d.melhor.uf)} <small>(${pct(d.melhor.valor)})</small></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('anchor-dificuldade').innerHTML =
+    `Dos ${falhos.length} itens em que MS não pontuou por inteiro, <strong>${especificas.length} são fragilidade ` +
+    `própria</strong>: menos de ${pct(nac.limites.disseminada)} das unidades federativas zeraram, ou seja, ` +
+    `a maioria conseguiu e MS não. Outros ${comuns.length} são <strong>dificuldade comum ao país</strong>, ` +
+    `com pelo menos ${pct(nac.limites.comum)} das UFs zerando o mesmo item — ali o obstáculo é do estágio ` +
+    `nacional, não de MS isoladamente.`;
+
+  const corpo = document.getElementById('tab-nacional-ind');
+  corpo.innerHTML = falhos.map((i) => `
+    <tr data-dificuldade="${i.dificuldade}">
+      <td class="code">${esc(i.codigo)}</td>
+      <td>${esc(rotuloDim(i.dimensao, nomes[i.dimensao]))}</td>
+      <td><span class="tag tag-${i.ms_status}">${i.ms_status === 'zerado' ? 'Zerado' : 'Parcial'}</span></td>
+      <td class="n">${i.zerados} <small>(${pct(i.share_zerado)})</small></td>
+      <td class="n">${i.parciais}</td>
+      <td class="n">${i.cheios}</td>
+      <td class="n"><span class="delta ${i.ms_vs_media >= 0 ? 'up' : 'down'}">${sinal(i.ms_vs_media)}</span></td>
+      <td><span class="marca marca-${i.dificuldade}">${DIFICULDADE[i.dificuldade]}</span></td>
+    </tr>`).join('');
+
+  const filtro = document.getElementById('f-dificuldade');
+  const contador = document.getElementById('contador-nacional');
+  function aplicar() {
+    let vis = 0;
+    falhos.forEach((i, idx) => {
+      const ok = !filtro.value || i.dificuldade === filtro.value;
+      corpo.children[idx].hidden = !ok;
+      if (ok) vis += 1;
+    });
+    contador.textContent = `Mostrando ${vis} de ${falhos.length} itens`;
+  }
+  filtro.addEventListener('change', aplicar);
+  aplicar();
+
+  document.getElementById('nota-nacional').innerHTML =
+    `<strong>Como a leitura é classificada:</strong> a fatia considerada é o percentual de unidades federativas
+     que zeraram o mesmo item. Até ${pct(nac.limites.disseminada)} é <em>fragilidade específica de MS</em> —
+     a maioria pontuou e MS não. De ${pct(nac.limites.disseminada)} a ${pct(nac.limites.comum)} é
+     <em>dificuldade disseminada</em>. De ${pct(nac.limites.comum)} para cima é
+     <em>dificuldade comum ao país</em>. Os cortes são desta análise, não da avaliação.` +
+    (nac.ausentes.length
+      ? ` <strong>Cobertura:</strong> ${nac.qtd_ufs} das 27 unidades federativas. Sem relatório na base:
+         ${nac.ausentes.map(esc).join(', ')} — os percentuais desta seção são sobre as ${nac.qtd_ufs} presentes.`
+      : '');
 }
 
 /* ---------------- 6. Achados ---------------- */

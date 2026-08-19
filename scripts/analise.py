@@ -13,6 +13,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 BASE = RAIZ / "data" / "indicadores.json"
 CONTEXTO = RAIZ / "data" / "contexto.json"
+NACIONAL = RAIZ / "data" / "nacional.json"
 SAIDA = RAIZ / "data" / "analise.json"
 
 
@@ -150,7 +151,8 @@ def main() -> None:
         "responsaveis": responsaveis,
         "prioridades": prioridades,
         "indicadores": indicadores,
-        "nacional": None,  # preenchido quando a planilha das 27 UFs chegar
+        # Secao 5 so existe quando scripts/nacional.py ja rodou sobre data/uf/.
+        "nacional": carrega(NACIONAL) if NACIONAL.exists() else None,
     }
 
     # Self-check: os recortes tem que fechar com o total geral.
@@ -165,13 +167,19 @@ def main() -> None:
     assert r["nao_enviados"] == 5, r["nao_enviados"]
     assert r["comprovados_sem_ponto"] == 1, r["comprovados_sem_ponto"]
     assert len(prioridades) == 22, len(prioridades)
+    if saida["nacional"]:
+        nac = saida["nacional"]
+        assert abs(nac["ms"]["total"] - r["total"]) < 0.01, "nacional nao bate com o resultado de MS"
+        assert len(nac["indicadores"]) == r["qtd"], len(nac["indicadores"])
 
     with SAIDA.open("w", encoding="utf-8", newline="\n") as f:
         json.dump(saida, f, ensure_ascii=False, indent=2)
         f.write("\n")
+    nac = saida["nacional"]
     print(
         f"OK -> {SAIDA.relative_to(RAIZ)}  "
-        f"({r['qtd']} itens, {len(responsaveis)} orgaos, {len(prioridades)} acoes)"
+        f"({r['qtd']} itens, {len(responsaveis)} orgaos, {len(prioridades)} acoes, "
+        f"{'comparativo com ' + str(nac['qtd_ufs']) + ' UFs' if nac else 'sem comparativo nacional'})"
     )
 
 

@@ -60,12 +60,15 @@ Os 7 zerados concentram 15,83 pontos — **62,9% de toda a perda**.
 │   └── logo-segov.svg             marca da SEGOV (versão colorida, rodapé)
 ├── data/
 │   ├── Relatorio_Final_MS.xlsx    planilha original recebida (fonte da pontuação)
+│   ├── uf/                        relatórios das demais UFs (para o comparativo nacional)
 │   ├── contexto.json              órgão, envio e justificativa por item (registro interno)
 │   ├── indicadores.json           gerado por extrair.py — alimenta o painel
+│   ├── nacional.json              gerado por nacional.py — comparativo entre UFs
 │   └── analise.json               gerado por analise.py — alimenta a análise
 ├── scripts/
 │   ├── extrair.py                 xlsx → indicadores.json, com verificação embutida
-│   └── analise.py                 + contexto.json → analise.json, com verificação embutida
+│   ├── nacional.py                data/uf/*.xlsx → nacional.json, ranking e cruzamento por item
+│   └── analise.py                 junta tudo em analise.json, com verificação embutida
 └── .github/workflows/deploy.yml   verificação + publicação no GitHub Pages
 ```
 
@@ -117,9 +120,18 @@ declarados como CSS custom properties no topo de `assets/styles.css`.
 transcrito do registro interno de acompanhamento do ciclo mantido pela equipe da SETDIG. Esse
 registro vive fora deste repositório e não acompanha a planilha, por isso foi versionado aqui.
 
-### O que ainda falta
-
-A comparação de MS com os demais estados depende do **relatório consolidado do ciclo 2026 com as 27
-unidades federativas**, item a item. A planilha disponível traz apenas as linhas de MS. Enquanto o
-arquivo não chega, a seção 5 da análise executiva fica marcada como pendente de dado — nada foi
+**Comparativo entre unidades federativas:** os arquivos `Relatorio_Final_<UF>.xlsx` em `data/uf/`.
+Se a pasta estiver vazia, a seção 5 da análise aparece marcada como pendente de dado — nada é
 estimado nem preenchido por inferência.
+
+### Ligar o comparativo nacional
+
+```bash
+cp /caminho/dos/relatorios/Relatorio_Final_*.xlsx data/uf/
+python scripts/nacional.py
+python scripts/analise.py
+```
+
+`nacional.py` valida o cabeçalho de cada arquivo, recusa UF duplicada, confere que o total de MS bate
+com o resultado já publicado e avisa quais unidades federativas ficaram de fora. Todos os percentuais
+da seção são calculados sobre as UFs presentes, e a cobertura aparece na própria página.

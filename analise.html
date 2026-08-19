@@ -188,9 +188,71 @@
     <section id="s5" aria-labelledby="h5">
       <div class="sec-head">
         <p class="kicker">5. Comparação com os demais estados</p>
-        <h2 id="h5">Pendente de dado</h2>
+        <h2 id="h5">Onde MS fica no conjunto do país</h2>
+        <p class="anchor" id="anchor-nacional"></p>
       </div>
-      <div class="lacuna" id="lacuna"></div>
+      <div class="lacuna" id="lacuna" hidden></div>
+
+      <div id="bloco-nacional" hidden>
+        <div class="kpis" id="kpis-nacional"></div>
+
+        <h3 class="sub-titulo">Ranking geral das unidades federativas</h3>
+        <div id="chart-ranking"></div>
+
+        <h3 class="sub-titulo">Desempenho de MS por dimensão, contra a média nacional</h3>
+        <div class="table-scroll">
+          <table>
+            <caption>Aproveitamento de MS em cada dimensão comparado à média das unidades
+              federativas avaliadas.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Dimensão</th>
+                <th scope="col" class="n">MS</th>
+                <th scope="col" class="n">Média nacional</th>
+                <th scope="col" class="n">Diferença</th>
+                <th scope="col" class="n">Posição</th>
+                <th scope="col">Melhor colocada</th>
+              </tr>
+            </thead>
+            <tbody id="tab-nacional-dim"></tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-titulo">Os itens em que MS não pontuou por inteiro</h3>
+        <p class="anchor" id="anchor-dificuldade"></p>
+        <div class="filters">
+          <div class="field">
+            <label for="f-dificuldade">Tipo de dificuldade</label>
+            <select id="f-dificuldade">
+              <option value="">Todos os tipos</option>
+              <option value="especifica">Específica de MS</option>
+              <option value="disseminada">Disseminada</option>
+              <option value="comum">Comum ao país</option>
+            </select>
+          </div>
+          <p class="count" id="contador-nacional" role="status"></p>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <caption>Para cada item, quantas unidades federativas zeraram, pontuaram em parte ou
+              atenderam integralmente, e onde MS ficou.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Dimensão</th>
+                <th scope="col">Situação de MS</th>
+                <th scope="col" class="n">Zeraram</th>
+                <th scope="col" class="n">Parciais</th>
+                <th scope="col" class="n">Integrais</th>
+                <th scope="col" class="n">MS × média</th>
+                <th scope="col">Leitura</th>
+              </tr>
+            </thead>
+            <tbody id="tab-nacional-ind"></tbody>
+          </table>
+        </div>
+        <p class="note" id="nota-nacional"></p>
+      </div>
     </section>
 
     <!-- 6 ------------------------------------------------------------------ -->

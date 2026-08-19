@@ -25,9 +25,17 @@ jobs:
       - run: pip install openpyxl
       # Reprocessa a planilha e falha se os numeros do relatorio mudarem (asserts em scripts/extrair.py)
       - run: python scripts/extrair.py
+      # Comparativo nacional so roda se os relatorios estaduais estiverem versionados
+      - name: Cruzar com os demais estados (se houver relatorios em data/uf)
+        run: |
+          if ls data/uf/Relatorio_Final_*.xlsx >/dev/null 2>&1; then
+            python scripts/nacional.py
+          else
+            echo "Sem relatorios estaduais em data/uf - secao 5 fica pendente de dado."
+          fi
       # Recruza com o contexto do registro interno e confere os totais (asserts em scripts/analise.py)
       - run: python scripts/analise.py
-      - run: git diff --exit-code data/indicadores.json data/analise.json
+      - run: git diff --exit-code data/
 
   publicar:
     needs: verificar
