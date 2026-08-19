@@ -4,7 +4,12 @@ Página de leitura do resultado final de MS no ciclo **2026** da avaliação nac
 serviços públicos digitais (IOSPD/ABEPTIC): nota por dimensão, o que ficou zerado e onde os
 pontos foram perdidos.
 
-**Publicado em:** https://fabioramos-02.github.io/abep/
+Duas páginas:
+
+| Página | Para quem | O que responde |
+|--------|-----------|----------------|
+| **[Painel](https://fabioramos-02.github.io/abep/)** | leitura rápida | quanto tiramos, onde perdemos, o que zeramos |
+| **[Análise executiva](https://fabioramos-02.github.io/abep/analise.html)** | gestão e pontos focais | situação item a item, justificativa da avaliação, responsabilidade por órgão, prioridades de recuperação |
 
 ---
 
@@ -45,16 +50,22 @@ Os 7 zerados concentram 15,83 pontos — **62,9% de toda a perda**.
 ```
 .
 ├── index.html                     página única do relatório
+├── analise.html                   análise executiva (7 seções)
 ├── assets/
 │   ├── styles.css                 tokens do Design System MS.GOV + layout
-│   ├── app.js                     render dos gráficos SVG, tabelas e filtros
+│   ├── base.js                    helpers compartilhados e gerador de barras SVG
+│   ├── app.js                     render do painel
+│   ├── analise.js                 render da análise executiva
 │   ├── logo-ms-horizontal.svg     marca do Governo do Estado (versão branca, topo)
 │   └── logo-segov.svg             marca da SEGOV (versão colorida, rodapé)
 ├── data/
-│   ├── Relatorio_Final_MS.xlsx    planilha original recebida (fonte)
-│   └── indicadores.json           dados extraídos, consumidos pela página
+│   ├── Relatorio_Final_MS.xlsx    planilha original recebida (fonte da pontuação)
+│   ├── contexto.json              órgão, envio e justificativa por item (registro interno)
+│   ├── indicadores.json           gerado por extrair.py — alimenta o painel
+│   └── analise.json               gerado por analise.py — alimenta a análise
 ├── scripts/
-│   └── extrair.py                 xlsx → json, com verificação embutida
+│   ├── extrair.py                 xlsx → indicadores.json, com verificação embutida
+│   └── analise.py                 + contexto.json → analise.json, com verificação embutida
 └── .github/workflows/deploy.yml   verificação + publicação no GitHub Pages
 ```
 
@@ -75,14 +86,14 @@ sistema de arquivos — o `fetch` do JSON exige um servidor.
 1. Substituir `data/Relatorio_Final_MS.xlsx` pela nova planilha.
 2. Ajustar os valores esperados nos `assert` de `scripts/extrair.py` (eles travam os números do
    ciclo 2026 de propósito).
-3. Regerar o JSON:
+3. Regerar os dois JSON, nesta ordem:
 
 ```bash
-python scripts/extrair.py
+python scripts/extrair.py && python scripts/analise.py
 ```
 
-4. Commit e push. O workflow reprocessa a planilha e falha se `data/indicadores.json` estiver
-   desatualizado em relação ao xlsx.
+4. Commit e push. O workflow reprocessa a planilha e falha se os JSON versionados estiverem
+   desatualizados em relação ao xlsx.
 
 ## Publicação
 
@@ -97,6 +108,18 @@ Design System MS.GOV v2.0.0 (SGD/SETDIG) — azul institucional `#004F9F`, títu
 corpo em Roboto, espaçamento base-8, cores semânticas de sucesso/alerta/erro. Os tokens estão
 declarados como CSS custom properties no topo de `assets/styles.css`.
 
-## Fonte
+## Fonte dos dados
 
-Relatório final do ciclo 2026 recebido pela SETDIG em planilha. Valores publicados sem alteração.
+**Pontuação, classificação e valor máximo:** `data/Relatorio_Final_MS.xlsx`, relatório final do ciclo
+2026 recebido pela SETDIG. Valores publicados sem alteração.
+
+**Situação de envio, órgão responsável e justificativa da avaliação:** `data/contexto.json`,
+transcrito do registro interno de acompanhamento do ciclo mantido pela equipe da SETDIG. Esse
+registro vive fora deste repositório e não acompanha a planilha, por isso foi versionado aqui.
+
+### O que ainda falta
+
+A comparação de MS com os demais estados depende do **relatório consolidado do ciclo 2026 com as 27
+unidades federativas**, item a item. A planilha disponível traz apenas as linhas de MS. Enquanto o
+arquivo não chega, a seção 5 da análise executiva fica marcada como pendente de dado — nada foi
+estimado nem preenchido por inferência.

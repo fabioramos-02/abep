@@ -25,7 +25,9 @@ jobs:
       - run: pip install openpyxl
       # Reprocessa a planilha e falha se os numeros do relatorio mudarem (asserts em scripts/extrair.py)
       - run: python scripts/extrair.py
-      - run: git diff --exit-code data/indicadores.json
+      # Recruza com o contexto do registro interno e confere os totais (asserts em scripts/analise.py)
+      - run: python scripts/analise.py
+      - run: git diff --exit-code data/indicadores.json data/analise.json
 
   publicar:
     needs: verificar

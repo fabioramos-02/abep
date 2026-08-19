@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Análise executiva — avaliação de serviços digitais 2026</title>
+  <meta name="description"
+    content="Análise executiva do resultado de Mato Grosso do Sul na avaliação de oferta de serviços públicos digitais de 2026: desempenho por dimensão, itens de baixo desempenho, responsabilidade por órgão e recomendações.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+  <div class="gov">
+    <div class="wrap">
+      <img class="logo-ms" src="assets/logo-ms-horizontal.svg" alt="Governo do Estado de Mato Grosso do Sul" width="347"
+        height="110">
+      <span class="org">SETDIG — Secretaria-Executiva de Transformação Digital</span>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Análise executiva · Ciclo 2026</p>
+        <h1>O que explica os 25 pontos que Mato Grosso do Sul deixou na mesa</h1>
+        <p class="lede">Leitura completa do resultado: situação de cada uma das 44 exigências, desempenho
+          das 5 dimensões, responsabilidade por órgão e o que dá para recuperar com menos esforço.
+          <a class="link-claro" href="index.html">Ver o painel resumido</a>.
+        </p>
+      </div>
+      <div class="score" id="score"></div>
+    </div>
+  </header>
+
+  <nav class="sumario" aria-label="Seções desta análise">
+    <div class="wrap">
+      <ol>
+        <li><a href="#s1">1. Visão geral</a></li>
+        <li><a href="#s2">2. Por dimensão</a></li>
+        <li><a href="#s3">3. Baixo desempenho</a></li>
+        <li><a href="#s4">4. Responsabilidade</a></li>
+        <li><a href="#s5">5. Demais estados</a></li>
+        <li><a href="#s6">6. Achados</a></li>
+        <li><a href="#s7">7. Recomendações</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <main id="conteudo" class="wrap">
+
+    <!-- 1 ------------------------------------------------------------------ -->
+    <section id="s1" aria-labelledby="h1">
+      <div class="sec-head">
+        <p class="kicker">1. Visão geral</p>
+        <h2 id="h1">Como as 44 exigências se distribuíram</h2>
+        <p class="anchor" id="anchor-geral"></p>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="table-scroll" style="margin-top:24px">
+        <table>
+          <caption>Situação das exigências avaliadas e pontos perdidos em cada situação.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Situação</th>
+              <th scope="col" class="n">Exigências</th>
+              <th scope="col" class="n">% do total</th>
+              <th scope="col" class="n">Pontos perdidos</th>
+              <th scope="col" class="n">% da perda</th>
+            </tr>
+          </thead>
+          <tbody id="tab-situacao"></tbody>
+        </table>
+      </div>
+      <p class="note" id="nota-geral"></p>
+    </section>
+
+    <!-- 2 ------------------------------------------------------------------ -->
+    <section id="s2" aria-labelledby="h2d">
+      <div class="sec-head">
+        <p class="kicker">2. Análise por dimensão</p>
+        <h2 id="h2d">Onde cada dimensão ganhou e perdeu ponto</h2>
+        <p class="anchor" id="anchor-dim"></p>
+      </div>
+
+      <div id="chart-aproveitamento"></div>
+      <p class="note"><strong>Como ler:</strong> a barra é o percentual da nota máxima que a dimensão obteve.
+        A linha tracejada marca a média geral do Estado. Quem está à esquerda dela puxa o resultado para baixo.</p>
+
+      <div class="table-scroll" style="margin-top:32px">
+        <table>
+          <caption>Composição de cada dimensão: quantidade de exigências em cada situação e desempenho geral.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Dimensão</th>
+              <th scope="col" class="n">Peso</th>
+              <th scope="col" class="n">Itens</th>
+              <th scope="col" class="n">Integrais</th>
+              <th scope="col" class="n">Parciais</th>
+              <th scope="col" class="n">Zerados</th>
+              <th scope="col" class="n">Não enviados</th>
+              <th scope="col" class="n">Pontos</th>
+              <th scope="col" class="n">Desempenho</th>
+            </tr>
+          </thead>
+          <tbody id="tab-dim"></tbody>
+          <tfoot id="tab-dim-total"></tfoot>
+        </table>
+      </div>
+
+      <div class="dim-cards" id="dim-cards"></div>
+    </section>
+
+    <!-- 3 ------------------------------------------------------------------ -->
+    <section id="s3" aria-labelledby="h3">
+      <div class="sec-head">
+        <p class="kicker">3. Itens de baixo desempenho</p>
+        <h2 id="h3">Cada item que custou ponto ou ficou sem envio</h2>
+        <p class="anchor" id="anchor-baixo"></p>
+      </div>
+
+      <div class="filters">
+        <div class="field">
+          <label for="f-dim">Dimensão</label>
+          <select id="f-dim">
+            <option value="">Todas as dimensões</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-situacao">Situação</label>
+          <select id="f-situacao">
+            <option value="">Todas as situações</option>
+            <option value="zerado">Zerado</option>
+            <option value="parcial">Parcial</option>
+            <option value="naoenviado">Não enviado</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-orgao">Órgão responsável</label>
+          <select id="f-orgao">
+            <option value="">Todos os órgãos</option>
+          </select>
+        </div>
+        <p class="count" id="contador" role="status"></p>
+      </div>
+
+      <div id="lista-baixo"></div>
+    </section>
+
+    <!-- 4 ------------------------------------------------------------------ -->
+    <section id="s4" aria-labelledby="h4">
+      <div class="sec-head">
+        <p class="kicker">4. Responsabilidade por órgão</p>
+        <h2 id="h4">Quem responde pelos pontos perdidos</h2>
+        <p class="anchor" id="anchor-orgao"></p>
+      </div>
+      <div id="chart-orgao"></div>
+      <div class="table-scroll" style="margin-top:32px">
+        <table>
+          <caption>Ranking por impacto na nota. Itens compartilhados têm a perda rateada entre os órgãos
+            envolvidos, para o total continuar fechando com os pontos perdidos do Estado.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Órgão</th>
+              <th scope="col" class="n">Itens</th>
+              <th scope="col" class="n">Zerados</th>
+              <th scope="col" class="n">Parciais</th>
+              <th scope="col" class="n">Não enviados</th>
+              <th scope="col" class="n">Pontos a recuperar</th>
+              <th scope="col">Itens pendentes</th>
+            </tr>
+          </thead>
+          <tbody id="tab-orgao"></tbody>
+        </table>
+      </div>
+      <p class="note" id="nota-orgao"></p>
+    </section>
+
+    <!-- 5 ------------------------------------------------------------------ -->
+    <section id="s5" aria-labelledby="h5">
+      <div class="sec-head">
+        <p class="kicker">5. Comparação com os demais estados</p>
+        <h2 id="h5">Pendente de dado</h2>
+      </div>
+      <div class="lacuna" id="lacuna"></div>
+    </section>
+
+    <!-- 6 ------------------------------------------------------------------ -->
+    <section id="s6" aria-labelledby="h6">
+      <div class="sec-head">
+        <p class="kicker">6. Principais achados</p>
+        <h2 id="h6">O que este resultado diz</h2>
+      </div>
+      <div class="achados" id="achados"></div>
+    </section>
+
+    <!-- 7 ------------------------------------------------------------------ -->
+    <section id="s7" aria-labelledby="h7">
+      <div class="sec-head">
+        <p class="kicker">7. Recomendações</p>
+        <h2 id="h7">Por onde começar</h2>
+        <p class="anchor" id="anchor-reco"></p>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <caption>Ações ordenadas pelo esforço estimado e, dentro de cada faixa, pelo ganho em pontos.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Prioridade</th>
+              <th scope="col">Item</th>
+              <th scope="col">O que fazer</th>
+              <th scope="col">Tipo de ação</th>
+              <th scope="col">Órgão</th>
+              <th scope="col" class="n">Ganho</th>
+            </tr>
+          </thead>
+          <tbody id="tab-reco"></tbody>
+        </table>
+      </div>
+      <p class="note"><strong>Sobre o esforço:</strong> a classificação em três faixas é uma leitura desta análise,
+        não da avaliação. Serve para separar o que depende de documento e evidência do que exige sistema novo,
+        programa novo ou investimento em infraestrutura.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap cols">
+      <div>
+        <p><strong>De onde vem este dado</strong></p>
+        <p>Pontuação e classificação: relatório final de 2026 recebido pela SETDIG em planilha, sem alteração
+          de valores. Situação de envio, órgão responsável e justificativa: registro interno de acompanhamento
+          do ciclo, mantido pela equipe da SETDIG.</p>
+      </div>
+      <div>
+        <p><strong>Limite desta análise</strong></p>
+        <p>Cobre apenas Mato Grosso do Sul no ciclo de 2026. A comparação com os demais estados depende da
+          planilha nacional consolidada, ainda não disponível.</p>
+      </div>
+      <div>
+        <p class="plaque">
+          <img src="assets/logo-segov.svg" alt="SEGOV — Secretaria de Estado de Governo e Gestão Estratégica"
+            width="402" height="95">
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/base.js"></script>
+  <script src="assets/analise.js"></script>
+</body>
+
+</html>

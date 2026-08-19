@@ -4,11 +4,18 @@ Contexto para sessões futuras neste repositório.
 
 ## O que é
 
-Página estática que apresenta o resultado de **Mato Grosso do Sul no ciclo 2026 do IOSPD/ABEPTIC**
+Site estático que apresenta o resultado de **Mato Grosso do Sul no ciclo 2026 do IOSPD/ABEPTIC**
 — avaliação nacional de oferta de serviços públicos digitais, aplicada aos estados pela ABEP-TIC.
 
 Público-alvo: gestores da SETDIG e das secretarias envolvidas. O objetivo é responder três
 perguntas, nesta ordem: *quanto tiramos*, *onde perdemos ponto*, *o que dá para recuperar*.
+
+Duas páginas, mesmo dado, profundidades diferentes:
+
+- `index.html` — painel de leitura rápida. Nota, desempenho por dimensão, os 7 zeros, os 15 parciais.
+- `analise.html` — análise executiva em 7 seções: visão geral, por dimensão, item a item com
+  justificativa da avaliação, responsabilidade por órgão, comparação nacional (pendente de dado),
+  achados e recomendações priorizadas por esforço.
 
 Órgão: **SETDIG — Secretaria-Executiva de Transformação Digital**, vinculada à SEGOV.
 Nunca escrever "Secretaria de Estado de Governo Digital".
@@ -21,10 +28,15 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
 2. **Design System MS.GOV é obrigatório.** Toda cor sai das CSS custom properties no `:root` de
    `assets/styles.css`. Zero hex solto no meio do CSS ou em `style=` inline que não venha de token.
    Azul institucional `#004F9F`; títulos Open Sans; corpo Roboto.
-3. **`data/indicadores.json` é gerado, não editado à mão.** Fonte de verdade é
-   `data/Relatorio_Final_MS.xlsx`. Para regerar: `python scripts/extrair.py`.
-4. **Os `assert` em `scripts/extrair.py` são o teste do repo.** Travam total 74,809 / 44 itens /
-   22-15-7. Se a planilha mudar, os asserts falham de propósito — atualizar os valores
+3. **Os dois JSON são gerados, não editados à mão.** `indicadores.json` vem do
+   `Relatorio_Final_MS.xlsx` via `scripts/extrair.py`; `analise.json` cruza esse resultado com
+   `data/contexto.json` via `scripts/analise.py` — nessa ordem. O único arquivo de dado editável à
+   mão é `contexto.json`, que carrega órgão responsável, situação de envio e justificativa da
+   avaliação por item, transcritos do registro interno da equipe.
+4. **Os `assert` nos dois scripts são o teste do repo.** `extrair.py` trava total 74,809 / 44 itens
+   / 22-15-7. `analise.py` trava que todos os recortes fecham com o total: soma por dimensão, soma
+   por órgão (com perda rateada em itens compartilhados), 5 não enviados e 1 comprovado sem
+   pontuação. Se a planilha mudar, os asserts falham de propósito — atualizar os valores
    conscientemente, nunca removê-los.
 5. **Linguagem cidadã no texto visível, com uma exceção: "Dimensão".** Nada de "indicador",
    "IOSPD" ou "KPI" nos rótulos da página — usar "exigência", "não pontuou". Mas as cinco áreas
@@ -55,6 +67,17 @@ python -m http.server 5173     # servir a página (fetch não funciona em file:/
 Push em `main` dispara `.github/workflows/deploy.yml`: reprocessa a planilha, confere que o JSON
 versionado bate com a fonte (`git diff --exit-code`) e publica no GitHub Pages.
 Fonte do Pages configurada como **GitHub Actions** nas Settings do repositório.
+
+## Regra sobre o que não se sabe
+
+A seção 5 da análise (comparação com os demais estados) está marcada como **pendente de dado** porque
+a planilha disponível traz só as linhas de MS. Não estimar, não inferir posição no ranking, não
+preencher com "provavelmente". Quando o relatório consolidado das 27 UFs chegar, ele entra como
+`dados.nacional` em `analise.json` e `comparacaoNacional()` em `assets/analise.js` passa a renderizar
+o cruzamento — o resto da página não muda.
+
+Mesma regra para o item 4.5: classificado como "Evidência Comprovada" com pontuação 0. A divergência
+é da fonte e fica explícita na página, não silenciada.
 
 ## Contexto adicional
 

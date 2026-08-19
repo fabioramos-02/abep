@@ -1,0 +1,1371 @@
+{
+  "resumo": {
+    "uf": "MS",
+    "ciclo": 2026,
+    "total": 74.8092,
+    "maximo": 100.0004,
+    "perda": 25.1911,
+    "perda_zerados": 15.8334,
+    "share_zerados": 0.6285,
+    "qtd": 44,
+    "cheios": 22,
+    "parciais": 15,
+    "zerados": 7,
+    "nao_enviados": 5,
+    "comprovados_sem_ponto": 1,
+    "perda_cheios": 0.0,
+    "perda_parciais": 9.3577,
+    "perda_nao_enviados": 5.7917
+  },
+  "dimensoes": [
+    {
+      "numero": "1",
+      "nome": "Governança Digital",
+      "pontos": 22.5521,
+      "maximo": 30.0,
+      "perda": 7.4479,
+      "aproveitamento": 0.7517,
+      "qtd": 12,
+      "cheios": 7,
+      "parciais": 3,
+      "zerados": 2,
+      "descricao": "Base institucional do governo digital: estratégia vigente, quem lidera, colegiados de coordenação e de dados, interoperabilidade, portal único, assinatura eletrônica, meios de pagamento, cibersegurança e conectividade.",
+      "peso": 30.0,
+      "nao_enviados": 1,
+      "comprovados_sem_ponto": 0,
+      "share_perda": 0.2957
+    },
+    {
+      "numero": "2",
+      "nome": "Serviços Públicos Digitais",
+      "pontos": 25.5625,
+      "maximo": 30.0,
+      "perda": 4.4375,
+      "aproveitamento": 0.8521,
+      "qtd": 12,
+      "cheios": 8,
+      "parciais": 3,
+      "zerados": 1,
+      "descricao": "Oferta efetiva de serviços digitais ao cidadão nas áreas de educação, saúde, trânsito, previdência e identificação civil.",
+      "peso": 30.0,
+      "nao_enviados": 3,
+      "comprovados_sem_ponto": 0,
+      "share_perda": 0.1762
+    },
+    {
+      "numero": "3",
+      "nome": "Marco Legal e Normativo",
+      "pontos": 9.0973,
+      "maximo": 10.0002,
+      "perda": 0.9029,
+      "aproveitamento": 0.9097,
+      "qtd": 6,
+      "cheios": 3,
+      "parciais": 3,
+      "zerados": 0,
+      "descricao": "Normas estaduais que regulamentam o portal de serviços, os princípios de governo digital, a assinatura eletrônica, a linguagem simples e a gestão de dados.",
+      "peso": 10.0,
+      "nao_enviados": 0,
+      "comprovados_sem_ponto": 0,
+      "share_perda": 0.0358
+    },
+    {
+      "numero": "4",
+      "nome": "Usuários e Cidadãos",
+      "pontos": 11.2083,
+      "maximo": 20.0,
+      "perda": 8.7917,
+      "aproveitamento": 0.5604,
+      "qtd": 8,
+      "cheios": 1,
+      "parciais": 5,
+      "zerados": 2,
+      "descricao": "Experiência de quem usa o serviço: linguagem simples, acessibilidade, omnicanalidade, participação, avaliação de satisfação, inclusão digital e uso efetivo do portal.",
+      "peso": 20.0,
+      "nao_enviados": 1,
+      "comprovados_sem_ponto": 1,
+      "share_perda": 0.349
+    },
+    {
+      "numero": "5",
+      "nome": "Inovação e IA",
+      "pontos": 6.389,
+      "maximo": 10.0002,
+      "perda": 3.6112,
+      "aproveitamento": 0.6389,
+      "qtd": 6,
+      "cheios": 3,
+      "parciais": 1,
+      "zerados": 2,
+      "descricao": "Capacidade de inovar: política de IA, uso de IA nos serviços, compras públicas para inovação, APIs abertas, laboratório de inovação e apoio à transformação digital dos municípios.",
+      "peso": 10.0,
+      "nao_enviados": 0,
+      "comprovados_sem_ponto": 0,
+      "share_perda": 0.1434
+    }
+  ],
+  "responsaveis": [
+    {
+      "orgao": "SETDIG",
+      "qtd": 24,
+      "cheios": 10,
+      "parciais": 8,
+      "zerados": 6,
+      "nao_enviados": 1,
+      "perda": 18.4446,
+      "pendentes": [
+        "1.4",
+        "1.5",
+        "1.6",
+        "1.12",
+        "3.1",
+        "3.4",
+        "3.6",
+        "4.1",
+        "4.2",
+        "4.4",
+        "4.5",
+        "4.7",
+        "5.1",
+        "5.3"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "SED",
+      "qtd": 4,
+      "cheios": 2,
+      "parciais": 1,
+      "zerados": 1,
+      "nao_enviados": 1,
+      "perda": 2.5694,
+      "pendentes": [
+        "2.8",
+        "5.2"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "SES",
+      "qtd": 8,
+      "cheios": 4,
+      "parciais": 4,
+      "zerados": 0,
+      "nao_enviados": 2,
+      "perda": 1.3195,
+      "pendentes": [
+        "2.3",
+        "2.6",
+        "2.12",
+        "4.3",
+        "5.2"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "Funtrab",
+      "qtd": 1,
+      "cheios": 0,
+      "parciais": 1,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 1.25,
+      "pendentes": [
+        "4.6"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "SEJUSP",
+      "qtd": 2,
+      "cheios": 1,
+      "parciais": 1,
+      "zerados": 0,
+      "nao_enviados": 1,
+      "perda": 1.0,
+      "pendentes": [
+        "2.11"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "DETRAN",
+      "qtd": 5,
+      "cheios": 3,
+      "parciais": 2,
+      "zerados": 0,
+      "nao_enviados": 1,
+      "perda": 0.382,
+      "pendentes": [
+        "4.3",
+        "5.2"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "Governança (SEGOV/SETDIG)",
+      "qtd": 2,
+      "cheios": 1,
+      "parciais": 1,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 0.1562,
+      "pendentes": [
+        "1.7"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "JUCEMS",
+      "qtd": 2,
+      "cheios": 1,
+      "parciais": 1,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 0.0694,
+      "pendentes": [
+        "5.2"
+      ],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "AGEPREV",
+      "qtd": 1,
+      "cheios": 1,
+      "parciais": 0,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 0.0,
+      "pendentes": [],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "PGE",
+      "qtd": 1,
+      "cheios": 1,
+      "parciais": 0,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 0.0,
+      "pendentes": [],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "SEFAZ",
+      "qtd": 1,
+      "cheios": 1,
+      "parciais": 0,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 0.0,
+      "pendentes": [],
+      "so_coordenacao": false
+    },
+    {
+      "orgao": "UEMS",
+      "qtd": 1,
+      "cheios": 1,
+      "parciais": 0,
+      "zerados": 0,
+      "nao_enviados": 0,
+      "perda": 0.0,
+      "pendentes": [],
+      "so_coordenacao": false
+    }
+  ],
+  "prioridades": [
+    {
+      "codigo": "1.4",
+      "dimensao": "1",
+      "pergunta": "Existe estrutura colegiada de governança de dados instituída formalmente?",
+      "ganho": 2.5,
+      "acao": "Ato normativo",
+      "esforco": 1,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "4.5",
+      "dimensao": "4",
+      "pergunta": "Os cidadãos efetivamente acessam e utilizam o portal de serviços digitais?",
+      "ganho": 2.5,
+      "acao": "Contestação junto à ABEP-TIC",
+      "esforco": 1,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "5.1",
+      "dimensao": "5",
+      "pergunta": "O estado possui uma estratégia ou política estadual que oriente o uso de inteligência artificial (IA) no setor público?",
+      "ganho": 1.6667,
+      "acao": "Ato normativo",
+      "esforco": 1,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "2.3",
+      "dimensao": "2",
+      "pergunta": "O estado oferece serviços estruturados de telessaúde para o cidadão?",
+      "ganho": 0.625,
+      "acao": "Evidência documental",
+      "esforco": 1,
+      "orgaos": [
+        "SES"
+      ]
+    },
+    {
+      "codigo": "3.4",
+      "dimensao": "3",
+      "pergunta": "Existem normativas (leis estaduais, decretos ou portarias) que abordam os seguintes tópicos?",
+      "ganho": 0.4167,
+      "acao": "Ato normativo",
+      "esforco": 1,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "4.7",
+      "dimensao": "4",
+      "pergunta": "Possui metodologia e ferramenta de avaliação da satisfação dos usuários em relação aos serviços públicos prestados?",
+      "ganho": 0.4167,
+      "acao": "Publicação de dados",
+      "esforco": 1,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "2.12",
+      "dimensao": "2",
+      "pergunta": "O estado oferece acesso a serviços de saúde por meio de uma plataforma digital (ou aplicativo)?",
+      "ganho": 0.3125,
+      "acao": "Evidência documental",
+      "esforco": 1,
+      "orgaos": [
+        "SES"
+      ]
+    },
+    {
+      "codigo": "5.2",
+      "dimensao": "5",
+      "pergunta": "O estado já utilizou soluções baseadas em inteligência artificial para apoiar a oferta ou melhoria de serviços públicos?",
+      "ganho": 0.2778,
+      "acao": "Evidência documental",
+      "esforco": 1,
+      "orgaos": [
+        "SES",
+        "JUCEMS",
+        "SED",
+        "DETRAN"
+      ]
+    },
+    {
+      "codigo": "3.1",
+      "dimensao": "3",
+      "pergunta": "O funcionamento do portal único/portal de serviços foi regulamentado pelo governo estadual/distrital?",
+      "ganho": 0.2083,
+      "acao": "Ato normativo",
+      "esforco": 1,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "1.7",
+      "dimensao": "1",
+      "pergunta": "Possui um portal único ou um portal digital de serviços disponível ao cidadão?",
+      "ganho": 0.1562,
+      "acao": "Evidência documental",
+      "esforco": 1,
+      "orgaos": [
+        "Governança (SEGOV/SETDIG)"
+      ]
+    },
+    {
+      "codigo": "1.6",
+      "dimensao": "1",
+      "pergunta": "O estado possui um framework de interoperabilidade?",
+      "ganho": 2.5,
+      "acao": "Norma técnica",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "4.2",
+      "dimensao": "4",
+      "pergunta": "O estado possui um kit de ferramentas para formalizar o processo de participação dos cidadãos e empresas no desenho, teste ou melhoria dos serviços digitais, realizando testes de usabilidade e compreensão com usuários reais?",
+      "ganho": 2.5,
+      "acao": "Documento de gestão",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "1.5",
+      "dimensao": "1",
+      "pergunta": "A instituição responsável por liderar as decisões de governo digital (ou outra) contribui com o desenvolvimento de competências digitais para os servidores públicos estaduais? marque as formas como se aplica:",
+      "ganho": 1.6667,
+      "acao": "Documento de gestão",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "5.3",
+      "dimensao": "5",
+      "pergunta": "O estado realizou compras públicas para inovação (CPIN) no último ano (2025), conforme os instrumentos previstos na lei nº 14.133/2021, lei nº 10.973/2004 e no marco legal das startups?",
+      "ganho": 1.6667,
+      "acao": "Processo administrativo",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "4.4",
+      "dimensao": "4",
+      "pergunta": "Qual o grau de adaptação do portal único ou de serviços para garantir acessibilidade a pessoas com deficiência auditiva e visual, em conformidade com as legislações vigentes, lei nº 13.146/2015 e com os padrões de acessibilidade (EMAG, W3C)?",
+      "ganho": 1.0,
+      "acao": "Ajuste no portal",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "4.1",
+      "dimensao": "4",
+      "pergunta": "Os serviços públicos estão descritos com linguagem simples?",
+      "ganho": 0.5,
+      "acao": "Revisão de conteúdo",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "3.6",
+      "dimensao": "3",
+      "pergunta": "Quais padrões ou diretrizes de gestão de dados existem no nível estadual?",
+      "ganho": 0.2778,
+      "acao": "Norma técnica",
+      "esforco": 2,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "2.8",
+      "dimensao": "2",
+      "pergunta": "Disponibiliza serviço de solicitação e emissão online de certificado de conclusão do ensino médio nas escolas da rede estadual de educação?",
+      "ganho": 2.5,
+      "acao": "Desenvolvimento de sistema",
+      "esforco": 3,
+      "orgaos": [
+        "SED"
+      ]
+    },
+    {
+      "codigo": "4.6",
+      "dimensao": "4",
+      "pergunta": "O estado possui uma estratégia de alfabetização digital e fechamento de brechas digitais?",
+      "ganho": 1.25,
+      "acao": "Programa novo",
+      "esforco": 3,
+      "orgaos": [
+        "Funtrab"
+      ]
+    },
+    {
+      "codigo": "2.11",
+      "dimensao": "2",
+      "pergunta": "Qual a porcentagem da população do estado com a carteira de identidade nacional (CIN)?",
+      "ganho": 1.0,
+      "acao": "Operação continuada",
+      "esforco": 3,
+      "orgaos": [
+        "SEJUSP"
+      ]
+    },
+    {
+      "codigo": "1.12",
+      "dimensao": "1",
+      "pergunta": "Com relação à conectividade, o estado:",
+      "ganho": 0.625,
+      "acao": "Investimento em infraestrutura",
+      "esforco": 3,
+      "orgaos": [
+        "SETDIG"
+      ]
+    },
+    {
+      "codigo": "4.3",
+      "dimensao": "4",
+      "pergunta": "Possui em operação uma estratégia de omnicanalidade que integre diferentes canais de atendimento?",
+      "ganho": 0.625,
+      "acao": "Integração entre canais",
+      "esforco": 3,
+      "orgaos": [
+        "SES",
+        "DETRAN"
+      ]
+    }
+  ],
+  "indicadores": [
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.1",
+      "pergunta": "Possui estratégia de governo digital vigente em 2026?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "Governança (SEGOV/SETDIG)"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.2",
+      "pergunta": "Existe uma instituição responsável por liderar e coordenar as decisões de governo digital e / ou de tecnologia da informação e comunicação e assegurar sua implementação de forma transversal no estado?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.3",
+      "pergunta": "Existe um órgão/estrutura formal colegiado de coordenação responsável por direcionar transversalmente as políticas e iniciativas de governo digital ou TIC?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.4",
+      "pergunta": "Existe estrutura colegiada de governança de dados instituída formalmente?",
+      "classificacao": "Evidência Não Comprovada",
+      "pontos": 0.0,
+      "maximo": 2.5,
+      "perda": 2.5,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "Também não pontuou em 2025, por a estrutura não estar ativa. Em 2026 seguiu sem comprovar colegiado de governança de dados formalmente instituído e em funcionamento; a via mais curta é o decreto de instituição.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.5",
+      "pergunta": "A instituição responsável por liderar as decisões de governo digital (ou outra) contribui com o desenvolvimento de competências digitais para os servidores públicos estaduais? marque as formas como se aplica:",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 0.8333,
+      "maximo": 2.5,
+      "perda": 1.6667,
+      "aproveitamento": 0.3333,
+      "status": "parcial",
+      "enviado": false,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Há ações de capacitação (1.5.c), mas falta marco formal de competências digitais (1.5.a) e diagnóstico periódico do quadro de servidores (1.5.b). Referência a checar: programa de gestão por competência da SAD.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.6",
+      "pergunta": "O estado possui um framework de interoperabilidade?",
+      "classificacao": "Evidência Não Comprovada",
+      "pontos": 0.0,
+      "maximo": 2.5,
+      "perda": 2.5,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "As evidências demonstram infraestrutura de rede (Infovia) e integrações federais (RNDS/gov.br), mas não comprovam barramento estadual de serviços. Falta norma técnica de padrões de interoperabilidade e catálogo público de APIs.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.7",
+      "pergunta": "Possui um portal único ou um portal digital de serviços disponível ao cidadão?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.3438,
+      "maximo": 2.5,
+      "perda": 0.1562,
+      "aproveitamento": 0.9375,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "Governança (SEGOV/SETDIG)"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Perdeu fração em 1.7.d — consistência da jornada ponta a ponta. Ação: testar três serviços completos avaliando linguagem, layout, padrão visual e clareza de navegação.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.8",
+      "pergunta": "Utiliza solução de assinatura eletrônica corporativa própria ou do gov.br?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.9",
+      "pergunta": "Possui opções de pagamentos de serviços disponíveis aos cidadãos através de PIX ou cartão de crédito?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "DETRAN",
+        "SEFAZ",
+        "JUCEMS"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.10",
+      "pergunta": "Existe uma unidade operacional de cibersegurança formalmente estabelecida e atualmente ativa?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.11",
+      "pergunta": "Possui uma equipe de resposta a incidentes (CERT) formalizada ou equivalente?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "1",
+      "codigo": "1.12",
+      "pergunta": "Com relação à conectividade, o estado:",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.875,
+      "maximo": 2.5,
+      "perda": 0.625,
+      "aproveitamento": 0.75,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "1.12.b não atendido: a banda larga das unidades está em 30 Mbps e a exigência é 100 Mbps de fibra. 1.12.c parcial: falta programa de acesso à internet para população de baixa renda.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.1",
+      "pergunta": "Disponibiliza serviço digital de rematrícula online nas escolas estaduais?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SED"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.2",
+      "pergunta": "Disponibiliza serviço digital para solicitação de medicamentos do componente especializado da assistência farmacêutica (CEAF)?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SES"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.3",
+      "pergunta": "O estado oferece serviços estruturados de telessaúde para o cidadão?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.875,
+      "maximo": 2.5,
+      "perda": 0.625,
+      "aproveitamento": 0.75,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SES"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "2.3.a: falta normativa ou portaria estadual instituindo formalmente a teleconsulta. 2.3.c: o sistema existe, mas faltam manuais técnicos de interoperabilidade com o prontuário eletrônico. 2.3.d: o protocolo foi comprovado por notícia, falta o documento oficial.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.4",
+      "pergunta": "Disponibiliza prova de vida online para servidores, aposentados e pensionistas?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SEJUSP",
+        "AGEPREV"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.5",
+      "pergunta": "Disponibiliza funcionalidade de apresentação de recurso e defesa online para infrações de trânsito em âmbito estadual?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "DETRAN"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.6",
+      "pergunta": "Disponibiliza consulta online dos medicamentos disponíveis na rede estadual de saúde?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": false,
+      "orgaos": [
+        "SES"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Consta como não enviado no registro interno, mas pontuou integralmente: a carta de serviço já descreve consulta de estoque e de medicamentos disponíveis, o que caracteriza a consulta online exigida.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.7",
+      "pergunta": "A rede estadual de saúde disponibiliza a emissão e o envio online de receita médica ao cidadão, após avaliação clínica por profissional habilitado?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SES"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.8",
+      "pergunta": "Disponibiliza serviço de solicitação e emissão online de certificado de conclusão do ensino médio nas escolas da rede estadual de educação?",
+      "classificacao": "Evidência Não Comprovada",
+      "pontos": 0.0,
+      "maximo": 2.5,
+      "perda": 2.5,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": false,
+      "orgaos": [
+        "SED"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Decisão consciente de não pontuar: o serviço exige etapa presencial. Para pontuar seria preciso um sistema em que o aluno solicita o certificado e recebe o documento digital, sem presença física. Sem pontuação há três ciclos seguidos.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.9",
+      "pergunta": "Disponibiliza serviços de transferência online de alunos entre escolas da rede estadual?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SED"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.10",
+      "pergunta": "Disponibiliza transferência digital de veículos?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "DETRAN"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.11",
+      "pergunta": "Qual a porcentagem da população do estado com a carteira de identidade nacional (CIN)?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.5,
+      "maximo": 2.5,
+      "perda": 1.0,
+      "aproveitamento": 0.6,
+      "status": "parcial",
+      "enviado": false,
+      "orgaos": [
+        "SEJUSP"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "Indicador de cobertura populacional da Carteira de Identidade Nacional: a nota acompanha o percentual de emissão alcançado. Pendência registrada: corrigir o print das evidências na pasta de rede.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "2",
+      "codigo": "2.12",
+      "pergunta": "O estado oferece acesso a serviços de saúde por meio de uma plataforma digital (ou aplicativo)?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.1875,
+      "maximo": 2.5,
+      "perda": 0.3125,
+      "aproveitamento": 0.875,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SES"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Todos os qualificadores foram atendidos, mas faltaram evidências visuais: link do app MS Digital, telas da área de saúde, Cartão SUS digital e documentos do programa SUS Digital.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "3",
+      "codigo": "3.1",
+      "pergunta": "O funcionamento do portal único/portal de serviços foi regulamentado pelo governo estadual/distrital?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.4583,
+      "maximo": 1.6667,
+      "perda": 0.2083,
+      "aproveitamento": 0.875,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "3.1.d parcial: a norma institui o portal e define responsabilidades, mas não fixa prazos nem etapas de implementação.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "3",
+      "codigo": "3.2",
+      "pergunta": "Os princípios para governo digital e eficiência pública foram normatizados pelo governo estadual/distrital, conforme previsto pela lei federal 14.129/2021?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.6667,
+      "maximo": 1.6667,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "3",
+      "codigo": "3.3",
+      "pergunta": "O uso de assinaturas eletrônicas em interações com entes públicos foi normatizado pelo governo estadual/distrital, conforme previsto pela lei federal 14.063/2020?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.6667,
+      "maximo": 1.6667,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "3",
+      "codigo": "3.4",
+      "pergunta": "Existem normativas (leis estaduais, decretos ou portarias) que abordam os seguintes tópicos?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.25,
+      "maximo": 1.6667,
+      "perda": 0.4167,
+      "aproveitamento": 0.75,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "3.4.a não atendido: não há normativa estadual sobre acessibilidade de serviços digitais. Simplificação administrativa, segurança da informação e privacidade estão cobertas.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "3",
+      "codigo": "3.5",
+      "pergunta": "Possui norma, manual ou diretriz oficial sobre linguagem simples aplicada à comunicação pública?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.6667,
+      "maximo": 1.6667,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "3",
+      "codigo": "3.6",
+      "pergunta": "Quais padrões ou diretrizes de gestão de dados existem no nível estadual?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.3889,
+      "maximo": 1.6667,
+      "perda": 0.2778,
+      "aproveitamento": 0.8333,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "3.6.b: falta diretriz técnica com métricas de qualidade de dados. 3.6.c: a legislação manda criar inventários nos Planos de Dados Abertos, mas não há manual padronizando a metodologia. 3.6.d: o link enviado leva ao Portal da Transparência, não a uma norma de anonimização.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.1",
+      "pergunta": "Os serviços públicos estão descritos com linguagem simples?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.0,
+      "maximo": 2.5,
+      "perda": 0.5,
+      "aproveitamento": 0.8,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "Perdeu fração por cobertura: parte das cartas de serviço da Dimensão II ainda precisa de revisão de linguagem simples.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.2",
+      "pergunta": "O estado possui um kit de ferramentas para formalizar o processo de participação dos cidadãos e empresas no desenho, teste ou melhoria dos serviços digitais, realizando testes de usabilidade e compreensão com usuários reais?",
+      "classificacao": "Evidência Não Comprovada",
+      "pontos": 0.0,
+      "maximo": 2.5,
+      "perda": 2.5,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Foram enviados o Manual de Arquitetura da Informação Digital, arquivos de teste A/B e o mecanismo de avaliação ao final da carta de serviço. A avaliação não aceitou o conjunto como kit formalizado de participação, com teste de usabilidade e compreensão junto a usuários reais.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.3",
+      "pergunta": "Possui em operação uma estratégia de omnicanalidade que integre diferentes canais de atendimento?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.875,
+      "maximo": 2.5,
+      "perda": 0.625,
+      "aproveitamento": 0.75,
+      "status": "parcial",
+      "enviado": false,
+      "orgaos": [
+        "SES",
+        "DETRAN"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "4.3.b: falta comprovar que o cidadão inicia o serviço em um canal e conclui em outro sem perder informação. 4.3.c: o agendamento do RG é setorial, falta sistema unificado integrado a vários órgãos. 4.3.d: a Glória do DETRAN faz a transição de chatbot para atendente humano, falta anexar a evidência.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.4",
+      "pergunta": "Qual o grau de adaptação do portal único ou de serviços para garantir acessibilidade a pessoas com deficiência auditiva e visual, em conformidade com as legislações vigentes, lei nº 13.146/2015 e com os padrões de acessibilidade (EMAG, W3C)?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.5,
+      "maximo": 2.5,
+      "perda": 1.0,
+      "aproveitamento": 0.6,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "Avaliado diretamente pelo comitê no portal, sem envio de evidência pelo Estado. A nota reflete o grau de conformidade do portal com EMAG e W3C para pessoas com deficiência auditiva e visual.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.5",
+      "pergunta": "Os cidadãos efetivamente acessam e utilizam o portal de serviços digitais?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 0.0,
+      "maximo": 2.5,
+      "perda": 2.5,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "Foram enviados extração SQL do banco e prints do controlador de acessos. A planilha registra a evidência como comprovada e ainda assim atribui zero — divergência da fonte, que precisa ser questionada junto à ABEP-TIC.",
+      "comprovado_sem_ponto": true
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.6",
+      "pergunta": "O estado possui uma estratégia de alfabetização digital e fechamento de brechas digitais?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.25,
+      "maximo": 2.5,
+      "perda": 1.25,
+      "aproveitamento": 0.5,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "Funtrab"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "4.6.a: o relatório MS Alfabetiza trata de alfabetização escolar, não de brechas digitais da população. 4.6.b: o MS Qualifica é qualificação profissional geral, sem vínculo com mapeamento de brechas digitais. 4.6.c: a evidência é infraestrutura de rede, não espaço físico dedicado ao cidadão. 4.6.d: os dispositivos foram entregues a servidores, não à população.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.7",
+      "pergunta": "Possui metodologia e ferramenta de avaliação da satisfação dos usuários em relação aos serviços públicos prestados?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.0833,
+      "maximo": 2.5,
+      "perda": 0.4167,
+      "aproveitamento": 0.8333,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "4.7.a parcial: os dados agregados das avaliações ainda não são públicos. 4.7.c pendente de verificação: métrica de facilidade de encontrar informação no portal.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "4",
+      "codigo": "4.8",
+      "pergunta": "Possui plataforma ou algum outro mecanismo para participação digital? (por exemplo, participa +)",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 2.5,
+      "maximo": 2.5,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "5",
+      "codigo": "5.1",
+      "pergunta": "O estado possui uma estratégia ou política estadual que oriente o uso de inteligência artificial (IA) no setor público?",
+      "classificacao": "Evidência Não Comprovada",
+      "pontos": 0.0,
+      "maximo": 1.6667,
+      "perda": 1.6667,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "A Resolução JUCEMS nº 1/2026 regulamenta o uso de IA apenas na JUCEMS e não configura política transversal do Executivo estadual. Faltam metas quantificáveis (5.1.a), plano de ação estruturado (5.1.b), painel de monitoramento (5.1.c) e prazo de revisão (5.1.e).",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "5",
+      "codigo": "5.2",
+      "pergunta": "O estado já utilizou soluções baseadas em inteligência artificial para apoiar a oferta ou melhoria de serviços públicos?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.3889,
+      "maximo": 1.6667,
+      "perda": 0.2778,
+      "aproveitamento": 0.8333,
+      "status": "parcial",
+      "enviado": true,
+      "orgaos": [
+        "SES",
+        "JUCEMS",
+        "SED",
+        "DETRAN"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "5.2.b parcial: a Glória do DETRAN não converte fala em texto e a evidência do TCE-MS não detalha reconhecimento de fala.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "5",
+      "codigo": "5.3",
+      "pergunta": "O estado realizou compras públicas para inovação (CPIN) no último ano (2025), conforme os instrumentos previstos na lei nº 14.133/2021, lei nº 10.973/2004 e no marco legal das startups?",
+      "classificacao": "Evidência Não Comprovada",
+      "pontos": 0.0,
+      "maximo": 1.6667,
+      "perda": 1.6667,
+      "aproveitamento": 0.0,
+      "status": "zerado",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "Nenhuma evidência de compra pública para inovação em 2025 pelos instrumentos da Lei 14.133/2021, da Lei 10.973/2004 ou do Marco Legal das Startups.",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "5",
+      "codigo": "5.4",
+      "pergunta": "Há uso de APIs abertas que permitam que terceiros (startups, empresas, universidades ou sociedade civil) criem aplicações, integrem dados ou desenvolvam novos serviços públicos digitais com base em dados governamentais?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.6667,
+      "maximo": 1.6667,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SETDIG"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "5",
+      "codigo": "5.5",
+      "pergunta": "O estado possui um laboratório de inovação (ou estrutura equivalente) voltado ao desenho, teste e experimentação de novas soluções digitais, envolvendo servidores, cidadãos e parceiros externos?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.6667,
+      "maximo": 1.6667,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "UEMS",
+        "PGE"
+      ],
+      "atribuicao": "tracker",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    },
+    {
+      "uf": "MS",
+      "dimensao": "5",
+      "codigo": "5.6",
+      "pergunta": "O estado possui iniciativa ou programa para apoiar a transformação digital dos seus municípios?",
+      "classificacao": "Evidência Comprovada",
+      "pontos": 1.6667,
+      "maximo": 1.6667,
+      "perda": 0.0,
+      "aproveitamento": 1.0,
+      "status": "cheio",
+      "enviado": true,
+      "orgaos": [
+        "SES"
+      ],
+      "atribuicao": "coordenacao",
+      "observacao": "",
+      "comprovado_sem_ponto": false
+    }
+  ],
+  "nacional": null
+}

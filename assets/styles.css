@@ -296,3 +296,116 @@ footer .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240
   .filters { display: none; }
   section { page-break-inside: avoid; }
 }
+
+/* ============================================================
+   Analise executiva (analise.html)
+   ============================================================ */
+
+.link-claro { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.link-claro:hover { color: var(--primary-100); }
+
+/* Sumario fixo */
+.sumario { background: var(--bg-muted); border-bottom: 1px solid var(--border-default); }
+.sumario ol {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 8px 24px;
+  min-height: 56px; align-items: center;
+}
+.sumario a {
+  font-size: 14px; text-decoration: none; color: var(--content-secondary);
+  padding: 4px 0; border-bottom: 2px solid transparent;
+}
+.sumario a:hover { color: var(--primary-500); border-bottom-color: var(--primary-500); }
+
+/* Tabelas: linhas de recorte e totais */
+tr.total th, tr.total td {
+  background: var(--bg-subtle); font-family: var(--font-display); font-weight: 700;
+  border-top: 2px solid var(--border-strong);
+}
+tr.sub-linha th, tr.sub-linha td { color: var(--content-secondary); font-style: italic; }
+tr.faixa th {
+  background: var(--primary-500); color: #fff; text-align: left;
+  font-size: 14px; letter-spacing: .04em; text-transform: uppercase;
+}
+td small, th small { font-weight: 400; color: var(--content-tertiary); }
+.code-list { font-family: var(--font-mono, monospace); font-size: 13px; color: var(--content-secondary); }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+
+/* Cards de dimensao */
+.dim-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px; margin-top: 32px;
+}
+.dim-card {
+  border: 1px solid var(--border-default); border-radius: var(--radius-card);
+  padding: 24px; background: var(--bg-default);
+}
+.dim-card-num {
+  font-family: var(--font-display); font-weight: 700; font-size: 12px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--primary-500); margin: 0 0 4px;
+}
+.dim-card h3 { margin: 0 0 8px; }
+.dim-card-desc { font-size: 14px; color: var(--content-secondary); margin: 0 0 16px; }
+.dim-card-bar {
+  height: 10px; background: var(--bg-subtle); border-radius: 5px; overflow: hidden; margin-bottom: 8px;
+}
+.dim-card-bar i { display: block; height: 100%; border-radius: 5px; }
+.dim-card-foot { font-size: 14px; color: var(--content-secondary); margin: 0; }
+
+/* Itens de baixo desempenho */
+#lista-baixo { display: grid; gap: 16px; }
+.item[hidden] { display: none; }
+.item {
+  border: 1px solid var(--border-default); border-left: 4px solid var(--border-strong);
+  border-radius: var(--radius-card); padding: 24px; background: var(--bg-default);
+}
+.item[data-situacao="zerado"] { border-left-color: var(--error); }
+.item[data-situacao="parcial"] { border-left-color: var(--warning); }
+.item-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 8px; }
+.item-head .code {
+  font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--primary-500);
+}
+.item-dim { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--content-tertiary); }
+.item-perda {
+  margin-left: auto; font-family: var(--font-display); font-weight: 700;
+  font-size: 18px; color: var(--error); font-variant-numeric: tabular-nums;
+}
+.item-q { font-size: 16px; margin: 0 0 16px; }
+.item-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 14px; }
+.item-score, .item-org { color: var(--content-secondary); }
+.item-org { font-weight: 700; color: var(--content-primary); }
+.item-obs {
+  margin: 16px 0 0; padding-top: 16px; border-top: 1px solid var(--bg-subtle);
+  font-size: 14px; color: var(--content-secondary);
+}
+.tag-neutro { background: var(--bg-subtle); color: var(--content-secondary); }
+
+/* Bloco de lacuna (secao 5) */
+.lacuna {
+  border: 2px dashed var(--border-strong); border-radius: var(--radius-card);
+  padding: 32px; background: var(--bg-muted);
+}
+.lacuna p { max-width: 78ch; }
+.lacuna p:last-child { margin-bottom: 0; }
+.lacuna-acao { font-size: 14px; color: var(--content-secondary); }
+
+/* Achados */
+.achados { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.achado {
+  border: 1px solid var(--border-default); border-top: 4px solid var(--primary-500);
+  border-radius: var(--radius-card); padding: 24px; background: var(--bg-default);
+}
+.achado-forte { border-top-color: var(--success); }
+.achado-fraco { border-top-color: var(--error); }
+.achado-impacto { border-top-color: var(--warning); }
+.achado-chance { border-top-color: var(--primary-500); }
+.achado-lacuna { border-top-color: var(--border-strong); }
+.achado h3 { margin: 0 0 16px; }
+.achado ul { margin: 0; padding-left: 24px; }
+.achado li { margin-bottom: 8px; font-size: 15px; color: var(--content-secondary); }
+.achado li strong { color: var(--content-primary); }
+
+@media (max-width: 720px) {
+  .sumario ol { gap: 8px 16px; padding: 8px 0; }
+  .item-perda { margin-left: 0; }
+}
