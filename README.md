@@ -47,7 +47,9 @@ Os 7 zerados concentram 15,83 pontos — **62,9% de toda a perda**.
 ├── index.html                     página única do relatório
 ├── assets/
 │   ├── styles.css                 tokens do Design System MS.GOV + layout
-│   └── app.js                     render dos gráficos SVG, tabelas e filtros
+│   ├── app.js                     render dos gráficos SVG, tabelas e filtros
+│   ├── logo-ms-horizontal.svg     marca do Governo do Estado (versão branca, topo)
+│   └── logo-segov.svg             marca da SEGOV (versão colorida, rodapé)
 ├── data/
 │   ├── Relatorio_Final_MS.xlsx    planilha original recebida (fonte)
 │   └── indicadores.json           dados extraídos, consumidos pela página
