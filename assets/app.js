@@ -10,6 +10,11 @@ const COR = {
   trilho: '#EAEBEC',
 };
 
+const ROMANO = { '1': 'I', '2': 'II', '3': 'III', '4': 'IV', '5': 'V' };
+
+/* A avaliacao numera as dimensoes em algarismo romano - a planilha traz so o numero arabe. */
+const rotuloDim = (numero, nome) => `Dimensão ${ROMANO[numero]} — ${nome}`;
+
 const ROTULO_STATUS = {
   cheio: 'Atendeu por inteiro',
   parcial: 'Atendeu em parte',
@@ -90,7 +95,7 @@ function kpis(resumo) {
 /* ---------------- Grafico de barras horizontais ---------------- */
 
 function barras({ itens, maximo, cor, formata, aria, referencia }) {
-  const LARG = 1040, ROTULO = 260, ALT_BARRA = 34, GAP = 22, PAD_TOP = 8, PAD_BOT = referencia ? 34 : 12;
+  const LARG = 1080, ROTULO = 300, ALT_BARRA = 34, GAP = 22, PAD_TOP = 8, PAD_BOT = referencia ? 34 : 12;
   const escala = LARG - ROTULO - 130;
   const alt = PAD_TOP + itens.length * (ALT_BARRA + GAP) + PAD_BOT;
 
@@ -128,9 +133,10 @@ function corPorAproveitamento(v) {
 
 /* ---------------- Tabelas ---------------- */
 
-function linhaParcial(i) {
+function linhaParcial(i, nomes) {
   return `<tr>
     <td class="code">${esc(i.codigo)}</td>
+    <td>${esc(rotuloDim(i.dimensao, nomes[i.dimensao]))}</td>
     <td>${esc(i.pergunta)}</td>
     <td>
       <span class="minibar" aria-hidden="true"><i style="width:${(i.aproveitamento * 100).toFixed(1)}%"></i></span>
@@ -143,7 +149,7 @@ function linhaParcial(i) {
 function linhaTodos(i, nomes) {
   return `<tr>
     <td class="code">${esc(i.codigo)}</td>
-    <td>${esc(nomes[i.dimensao])}</td>
+    <td>${esc(rotuloDim(i.dimensao, nomes[i.dimensao]))}</td>
     <td>${esc(i.pergunta)}</td>
     <td><span class="tag tag-${i.status}">${ROTULO_STATUS[i.status]}</span></td>
     <td class="n">${nf(i.pontos, 2)} / ${nf(i.maximo, 2)}</td>
@@ -163,13 +169,14 @@ function montar(dados) {
   const porAproveitamento = [...dimensoes].sort((a, b) => b.aproveitamento - a.aproveitamento);
   const melhor = porAproveitamento[0], pior = porAproveitamento[porAproveitamento.length - 1];
   document.getElementById('anchor-dim').innerHTML =
-    `<strong>${esc(melhor.nome)}</strong> é a área mais madura (${pct(melhor.aproveitamento)} da nota possível). ` +
-    `<strong>${esc(pior.nome)}</strong> é a mais frágil: só ${pct(pior.aproveitamento)}, ` +
+    `A <strong>${esc(rotuloDim(melhor.numero, melhor.nome))}</strong> é a mais madura ` +
+    `(${pct(melhor.aproveitamento)} da nota possível). ` +
+    `A <strong>${esc(rotuloDim(pior.numero, pior.nome))}</strong> é a mais frágil: só ${pct(pior.aproveitamento)}, ` +
     `com ${pior.cheios} de ${pior.qtd} exigências atendidas por inteiro.`;
 
   document.getElementById('chart-aproveitamento').innerHTML = barras({
     itens: porAproveitamento.map((d) => ({
-      rotulo: d.nome,
+      rotulo: rotuloDim(d.numero, d.nome),
       detalhe: `${d.cheios} de ${d.qtd} atendidas por inteiro`,
       valor: d.aproveitamento,
       cor: corPorAproveitamento(d.aproveitamento),
@@ -178,21 +185,22 @@ function montar(dados) {
     cor: COR.primaria,
     formata: (v) => pct(v),
     referencia: { valor: resumo.total / resumo.maximo, rotulo: `média geral ${pct(resumo.total / resumo.maximo)}` },
-    aria: 'Percentual da nota máxima obtido em cada área: ' +
-      porAproveitamento.map((d) => `${d.nome}, ${pct(d.aproveitamento)}`).join('; ') + '.',
+    aria: 'Percentual da nota máxima obtido em cada dimensão: ' +
+      porAproveitamento.map((d) => `${rotuloDim(d.numero, d.nome)}, ${pct(d.aproveitamento)}`).join('; ') + '.',
   });
 
   /* --- Grafico B: perda absoluta --- */
   const porPerda = [...dimensoes].sort((a, b) => b.perda - a.perda);
   const top2 = porPerda.slice(0, 2);
   document.getElementById('anchor-perda').innerHTML =
-    `Duas áreas — <strong>${esc(top2[0].nome)}</strong> e <strong>${esc(top2[1].nome)}</strong> — ` +
+    `Duas dimensões — <strong>${esc(rotuloDim(top2[0].numero, top2[0].nome))}</strong> e ` +
+    `<strong>${esc(rotuloDim(top2[1].numero, top2[1].nome))}</strong> — ` +
     `respondem por ${nf(top2[0].perda + top2[1].perda, 1)} dos ${nf(resumo.perda, 1)} pontos perdidos, ` +
     `ou seja ${pct((top2[0].perda + top2[1].perda) / resumo.perda)} de todo o prejuízo na nota.`;
 
   document.getElementById('chart-perda').innerHTML = barras({
     itens: porPerda.map((d) => ({
-      rotulo: d.nome,
+      rotulo: rotuloDim(d.numero, d.nome),
       detalhe: `${nf(d.pontos, 1)} de ${nf(d.maximo, 0)} pontos obtidos`,
       valor: d.perda,
       cor: COR.erro,
@@ -200,8 +208,8 @@ function montar(dados) {
     maximo: Math.max(...porPerda.map((d) => d.perda)),
     cor: COR.erro,
     formata: (v) => nf(v, 2) + ' pts',
-    aria: 'Pontos perdidos em cada área: ' +
-      porPerda.map((d) => `${d.nome}, ${nf(d.perda, 2)} pontos`).join('; ') + '.',
+    aria: 'Pontos perdidos em cada dimensão: ' +
+      porPerda.map((d) => `${rotuloDim(d.numero, d.nome)}, ${nf(d.perda, 2)} pontos`).join('; ') + '.',
   });
 
   /* --- Zerados --- */
@@ -214,7 +222,7 @@ function montar(dados) {
 
   document.getElementById('zeros').innerHTML = zerados.map((z) => `
     <article class="zero">
-      <p class="dim">${esc(nomes[z.dimensao])}</p>
+      <p class="dim">${esc(rotuloDim(z.dimensao, nomes[z.dimensao]))}</p>
       <span class="code">Item ${esc(z.codigo)}</span>
       <p class="q">${esc(z.pergunta)}</p>
       <p class="lost">${nf(z.perda, 2)} <small>pontos perdidos</small></p>
@@ -228,16 +236,34 @@ function montar(dados) {
     : '';
 
   /* --- Parciais --- */
-  const parciais = indicadores.filter((i) => i.status === 'parcial').sort((a, b) => b.perda - a.perda);
+  const parciais = indicadores.filter((i) => i.status === 'parcial')
+    .sort((a, b) => a.dimensao.localeCompare(b.dimensao) || b.perda - a.perda);
   const perdaParciais = parciais.reduce((s, i) => s + i.perda, 0);
+  const parciaisPorDim = dimensoes
+    .map((d) => ({ d, itens: parciais.filter((i) => i.dimensao === d.numero) }))
+    .filter((g) => g.itens.length)
+    .sort((a, b) => b.itens.reduce((s, i) => s + i.perda, 0) - a.itens.reduce((s, i) => s + i.perda, 0));
+  const lider = parciaisPorDim[0];
+
   document.getElementById('anchor-parciais').innerHTML =
     `${parciais.length} exigências foram atendidas só em parte e custaram <strong>${nf(perdaParciais, 2)} pontos</strong>. ` +
-    `São os casos mais baratos de corrigir: a iniciativa já existe, falta completar o que foi exigido.`;
-  document.getElementById('parciais').innerHTML = parciais.map(linhaParcial).join('');
+    `São os casos mais baratos de corrigir: a iniciativa já existe, falta completar o que foi exigido. ` +
+    `A concentração está na <strong>${esc(rotuloDim(lider.d.numero, lider.d.nome))}</strong>, ` +
+    `com ${lider.itens.length} exigências pela metade e ` +
+    `${nf(lider.itens.reduce((s, i) => s + i.perda, 0), 2)} pontos perdidos.`;
+
+  document.getElementById('parciais-por-dim').innerHTML = parciaisPorDim.map((g) => `
+    <li>
+      <span class="dim-name">${esc(rotuloDim(g.d.numero, g.d.nome))}</span>
+      <span class="dim-qtd">${g.itens.length} ${g.itens.length === 1 ? 'exigência' : 'exigências'}</span>
+      <span class="dim-perda">${nf(g.itens.reduce((s, i) => s + i.perda, 0), 2)} pts perdidos</span>
+    </li>`).join('');
+  document.getElementById('parciais').innerHTML = parciais.map((i) => linhaParcial(i, nomes)).join('');
 
   /* --- Tabela completa + filtros --- */
   const selDim = document.getElementById('f-dim');
-  selDim.innerHTML += dimensoes.map((d) => `<option value="${d.numero}">${esc(d.nome)}</option>`).join('');
+  selDim.innerHTML += dimensoes
+    .map((d) => `<option value="${d.numero}">${esc(rotuloDim(d.numero, d.nome))}</option>`).join('');
 
   const corpo = document.getElementById('todos');
   const contador = document.getElementById('contador');

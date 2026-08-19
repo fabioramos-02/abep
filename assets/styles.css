@@ -201,6 +201,23 @@ section:first-of-type { border-top: 0; }
 .zero .lost { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: var(--content-primary); }
 .zero .lost small { font-size: 14px; font-weight: 400; color: var(--content-tertiary); }
 
+/* ---------- Resumo por dimensao ---------- */
+.dim-list {
+  list-style: none; margin: 0 0 24px; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px;
+}
+.dim-list li {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px;
+  padding: 8px 16px; background: var(--bg-muted);
+  border-left: 4px solid var(--warning); border-radius: var(--radius-btn);
+}
+.dim-list .dim-name { font-family: var(--font-display); font-weight: 700; font-size: 14px; flex: 1 1 100%; }
+.dim-list .dim-qtd { font-size: 14px; color: var(--content-secondary); }
+.dim-list .dim-perda {
+  font-size: 14px; font-weight: 700; color: var(--content-primary);
+  margin-left: auto; font-variant-numeric: tabular-nums;
+}
+
 /* ---------- Tabelas ---------- */
 .table-scroll { overflow-x: auto; border: 1px solid var(--border-default); border-radius: var(--radius-card); }
 table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px; }

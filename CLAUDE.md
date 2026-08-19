@@ -26,9 +26,11 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
 4. **Os `assert` em `scripts/extrair.py` são o teste do repo.** Travam total 74,809 / 44 itens /
    22-15-7. Se a planilha mudar, os asserts falham de propósito — atualizar os valores
    conscientemente, nunca removê-los.
-5. **Linguagem cidadã no texto visível.** Nada de "indicador", "dimensão", "IOSPD" ou "KPI" nos
-   rótulos da página. Usar "exigência", "área avaliada", "não pontuou". Termo técnico só em
-   comentário de código.
+5. **Linguagem cidadã no texto visível, com uma exceção: "Dimensão".** Nada de "indicador",
+   "IOSPD" ou "KPI" nos rótulos da página — usar "exigência", "não pontuou". Mas as cinco áreas
+   são sempre chamadas de **Dimensão I a V** (algarismo romano + nome), porque é assim que a
+   avaliação as identifica e é assim que os pontos focais das secretarias se referem a elas.
+   O rótulo é montado por `rotuloDim()` em `assets/app.js`; não trocar por "área avaliada".
 6. **Toda seção entrega a conclusão em texto antes do gráfico** (elemento `.anchor`). O gráfico
    ilustra a frase; a frase não é legenda do gráfico.
 7. **Limitação do dado fica explícita.** Ver o tratamento do item 4.5 — classificado como
