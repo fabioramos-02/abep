@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serviços digitais de MS em 2026 — resultado por dimensão</title>
+<meta name="description" content="Como Mato Grosso do Sul foi avaliado em 2026 no índice de oferta de serviços públicos digitais: nota por dimensão, o que ficou zerado e onde os pontos foram perdidos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<div class="gov">
+  <div class="wrap">
+    <span class="brand">Governo de Mato Grosso do Sul</span>
+    <span class="org">SETDIG — Secretaria-Executiva de Transformação Digital</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Avaliação nacional de serviços digitais · Ciclo 2026</p>
+      <h1>Mato Grosso do Sul entrega bem o serviço. Falha em provar que o cidadão usa.</h1>
+      <p class="lede">O Estado foi avaliado em <strong>44 exigências</strong> distribuídas em 5 áreas.
+        Fechou o ciclo com <strong>74,8 de 100 pontos</strong>. Quase dois terços de tudo que ficou de fora
+        vem de <strong>7 exigências que não pontuaram nada</strong>.</p>
+    </div>
+    <div class="score" id="score"></div>
+  </div>
+</header>
+
+<main id="conteudo" class="wrap">
+
+  <section aria-labelledby="h-panorama">
+    <div class="sec-head">
+      <p class="kicker">Panorama</p>
+      <h2 id="h-panorama">O resultado em quatro números</h2>
+      <p class="anchor">Metade das exigências foi atendida por inteiro. A outra metade
+        ficou <strong>pela metade ou zerada</strong> — e é ali que estão os 25 pontos perdidos.</p>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section aria-labelledby="h-dim">
+    <div class="sec-head">
+      <p class="kicker">Desempenho por área</p>
+      <h2 id="h-dim">Onde o Estado é forte e onde é fraco</h2>
+      <p class="anchor" id="anchor-dim"></p>
+    </div>
+    <div id="chart-aproveitamento"></div>
+    <p class="note"><strong>Como ler:</strong> a barra mostra quanto da nota máxima daquela área o Estado
+      conseguiu. A linha tracejada é a média geral de 74,8%. Quem está à esquerda dela puxa o resultado para baixo.</p>
+  </section>
+
+  <section aria-labelledby="h-perda">
+    <div class="sec-head">
+      <p class="kicker">Prioridade</p>
+      <h2 id="h-perda">Onde estão os pontos perdidos</h2>
+      <p class="anchor" id="anchor-perda"></p>
+    </div>
+    <div id="chart-perda"></div>
+    <p class="note"><strong>Por que este gráfico existe:</strong> as áreas têm pesos diferentes na nota final.
+      Corrigir a área com o pior percentual nem sempre é o que mais rende ponto — este gráfico mostra o que
+      realmente rende, em pontos.</p>
+  </section>
+
+  <section aria-labelledby="h-zeros">
+    <div class="sec-head">
+      <p class="kicker">O que zeramos</p>
+      <h2 id="h-zeros">7 exigências não pontuaram nada</h2>
+      <p class="anchor" id="anchor-zeros"></p>
+    </div>
+    <div class="zeros" id="zeros"></div>
+    <p class="note" id="nota-zeros"></p>
+  </section>
+
+  <section aria-labelledby="h-parciais">
+    <div class="sec-head">
+      <p class="kicker">Quase lá</p>
+      <h2 id="h-parciais">O que pontuou pela metade</h2>
+      <p class="anchor" id="anchor-parciais"></p>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <caption>Exigências com pontuação parcial, da maior para a menor perda.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">O que foi avaliado</th>
+            <th scope="col">Quanto atendeu</th>
+            <th scope="col" class="n">Pontos perdidos</th>
+          </tr>
+        </thead>
+        <tbody id="parciais"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-todos">
+    <div class="sec-head">
+      <p class="kicker">Base completa</p>
+      <h2 id="h-todos">As 44 exigências, uma a uma</h2>
+      <p class="anchor">Use os filtros para achar um item específico ou ver só o que ficou pendente.</p>
+    </div>
+
+    <div class="filters">
+      <div class="field">
+        <label for="f-dim">Área avaliada</label>
+        <select id="f-dim"><option value="">Todas as áreas</option></select>
+      </div>
+      <div class="field">
+        <label for="f-status">Situação</label>
+        <select id="f-status">
+          <option value="">Todas as situações</option>
+          <option value="cheio">Atendeu por inteiro</option>
+          <option value="parcial">Atendeu em parte</option>
+          <option value="zerado">Não pontuou</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-busca">Buscar no texto</label>
+        <input id="f-busca" type="search" placeholder="ex.: saúde, portal, dados">
+      </div>
+      <p class="count" id="contador" role="status"></p>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+        <caption>Todas as exigências do ciclo 2026 com a pontuação recebida.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Área</th>
+            <th scope="col">O que foi avaliado</th>
+            <th scope="col">Situação</th>
+            <th scope="col" class="n">Pontos</th>
+          </tr>
+        </thead>
+        <tbody id="todos"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <p><strong>De onde vem este dado</strong></p>
+      <p>Relatório final do ciclo 2026 da avaliação nacional de oferta de serviços públicos digitais,
+        recebido pela SETDIG em planilha e publicado aqui sem alteração de valores.</p>
+    </div>
+    <div>
+      <p><strong>Limite deste relatório</strong></p>
+      <p>Mostra apenas o ciclo 2026 e apenas Mato Grosso do Sul. Não há comparação com anos anteriores
+        nem com outros estados — a planilha de origem não traz esses dados.</p>
+    </div>
+    <div>
+      <p><strong>Governo de Mato Grosso do Sul</strong></p>
+      <p>Secretaria-Executiva de Transformação Digital — SETDIG<br>
+        Padrão visual: Design System MS.GOV</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
