@@ -26,6 +26,7 @@ openpyxl.reader.excel.find_images = lambda *_a, **_k: ([], [])
 RAIZ = Path(__file__).resolve().parent.parent
 PADRAO = RAIZ / "data" / "uf"
 SAIDA = RAIZ / "data" / "nacional.json"
+SELOS = RAIZ / "data" / "selos.json"
 FOCO = "MS"
 
 # Colunas obrigatorias. Alguns arquivos trazem "Atendido" e "percentual" depois destas;
@@ -193,6 +194,24 @@ def main() -> None:
             "ufs_zeradas": zeradas,
         })
 
+    # --- Selos oficiais -----------------------------------------------------
+    selos = json.loads(SELOS.read_text(encoding="utf-8"))
+    por_uf = selos["por_uf"]
+    faltando_selo = sorted(set(ufs) - set(por_uf))
+    if faltando_selo:
+        raise SystemExit(f"UFs sem selo declarado em selos.json: {', '.join(faltando_selo)}")
+
+    contagem = {nome: [uf for uf in ufs if por_uf[uf] == nome] for nome in selos["ordem"]}
+    faixas = {
+        nome: {
+            "qtd": len(lista),
+            "ufs": lista,
+            "menor": round(min((totais[u] for u in lista), default=0), 4),
+            "maior": round(max((totais[u] for u in lista), default=0), 4),
+        }
+        for nome, lista in contagem.items()
+    }
+
     ms_total = totais[FOCO]
     saida = {
         "uf_foco": FOCO,
@@ -214,6 +233,16 @@ def main() -> None:
         # A media nacional e puxada para baixo por poucas UFs com nota muito baixa. Dizer
         # so "acima da media" mascara a posicao real, por isso a mediana anda junto.
         "abaixo_de_50": sorted(uf for uf, t in totais.items() if t < 50),
+        "selos": {
+            "rotulos": selos["rotulos"],
+            "ordem": selos["ordem"],
+            "faixas": faixas,
+            "ms": por_uf[FOCO],
+            "ms_2025": selos["ms_2025"],
+            "piso_sem_selo": selos["piso_sem_selo"],
+            "nao_participaram": selos["nao_participaram"],
+            "fonte": selos["_fonte"],
+        },
         "ranking": ranking,
         "dimensoes": dimensoes,
         "indicadores": indicadores,
@@ -225,6 +254,16 @@ def main() -> None:
     assert abs(ms_total - base["resumo"]["total"]) < 0.01, (ms_total, base["resumo"]["total"])
     assert len(indicadores) == base["resumo"]["qtd"], len(indicadores)
     assert 1 <= saida["ms"]["posicao"] <= qtd_ufs
+    # O selo e publicado pela ABEP-TIC, nao calculado aqui. Se a pontuacao apurada
+    # deixar de separar os grupos, os dois lados divergiram e alguem precisa olhar.
+    for melhor_grupo, pior_grupo in zip(selos["ordem"], selos["ordem"][1:]):
+        piso = faixas[melhor_grupo]["menor"]
+        teto = faixas[pior_grupo]["maior"]
+        assert piso > teto, f"selo {melhor_grupo} ({piso}) nao esta acima de {pior_grupo} ({teto})"
+    assert faixas["sem-selo"]["maior"] < selos["piso_sem_selo"], faixas["sem-selo"]["maior"]
+    assert faixas["bronze"]["menor"] >= selos["piso_sem_selo"], faixas["bronze"]["menor"]
+    assert sum(f["qtd"] for f in faixas.values()) == qtd_ufs
+
     faltando = [i["codigo"] for i in indicadores if i["qtd_ufs"] != qtd_ufs]
     if faltando:
         print(f"AVISO: itens ausentes em alguma UF: {', '.join(faltando)}")
@@ -234,7 +273,7 @@ def main() -> None:
         f.write("\n")
     print(
         f"OK -> {SAIDA.relative_to(RAIZ)}  ({qtd_ufs} UFs · "
-        f"{FOCO} em {saida['ms']['posicao']}º com {ms_total:.2f} · "
+        f"{FOCO} {selos['rotulos'][por_uf[FOCO]]}, {saida['ms']['posicao']}º com {ms_total:.2f} · "
         f"media nacional {saida['media_nacional']:.2f})"
     )
     if saida["ausentes"]:

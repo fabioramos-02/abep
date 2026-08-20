@@ -57,6 +57,16 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
 9. **Limitação do dado fica explícita.** Ver o tratamento do item 4.5 — classificado como
    "Evidência Comprovada" na planilha, mas com pontuação 0. Não silenciar divergências assim.
 
+## Selo do ciclo
+
+MS ficou com o **Selo Bronze** (era Prata em 2025, com 87,33 — queda de 14,34%). Os selos vêm
+prontos de `data/selos.json`, transcritos de <https://abep-tic.org.br/indice-abep-2026/>: **não
+calcular selo a partir da pontuação**. A página só publica o que a ABEP-TIC atribuiu. `nacional.py`
+apenas confere que a pontuação apurada separa os grupos na mesma ordem e que ninguém sem selo passou
+de 70 — se esse assert quebrar, os dois lados divergiram e alguém precisa olhar antes de publicar.
+
+Ouro 8 · Prata 4 · Bronze 3 · sem selo 11 · 26 participantes (o Paraná não participou).
+
 ## Números do ciclo 2026 (para conferência rápida)
 
 Total 74,81/100 · perda 25,19 · 44 indicadores (22 cheios, 15 parciais, 7 zerados).

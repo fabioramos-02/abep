@@ -225,6 +225,26 @@ function montar(dados) {
   aplicar();
 }
 
+/* O painel nao carrega o comparativo nacional inteiro so para exibir o selo:
+   data/selos.json tem 2 KB e basta. Se falhar, a pagina segue sem o bloco. */
+fetch('data/selos.json')
+  .then((r) => (r.ok ? r.json() : Promise.reject()))
+  .then((s) => {
+    const contagem = {};
+    for (const k of s.ordem) contagem[k] = 0;
+    for (const uf of Object.keys(s.por_uf)) contagem[s.por_uf[uf]] += 1;
+    document.getElementById('selo').innerHTML = blocoSelo({
+      selo: s.por_uf.MS,
+      rotulos: s.rotulos,
+      ordem: s.ordem,
+      contagem,
+      qtd: Object.keys(s.por_uf).length,
+      ms2025: s.ms_2025,
+      naoParticiparam: s.nao_participaram,
+    });
+  })
+  .catch(() => {});
+
 fetch('data/indicadores.json')
   .then((r) => {
     if (!r.ok) throw new Error('HTTP ' + r.status);

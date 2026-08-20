@@ -39,6 +39,12 @@
   --radius-btn: 4px;
   --radius-card: 8px;
 
+  /* Selos do ciclo - conceito da avaliacao, nao da marca do Estado */
+  --selo-ouro: #8A6D00;   --selo-ouro-bg: #FAEFC7;
+  --selo-prata: #4A5257;  --selo-prata-bg: #EAEBEC;
+  --selo-bronze: #8A4A1F; --selo-bronze-bg: #F6E2D3;
+  --selo-sem: #545D64;    --selo-sem-bg: #F9F9F9;
+
   /* Grid */
   --max: 1120px;
 }
@@ -117,6 +123,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   letter-spacing: .16em; text-transform: uppercase; color: var(--primary-200);
   margin: 0 0 16px;
 }
+/* ---------- Selo do ciclo ---------- */
+.selo-bloco { margin: 0 0 24px; }
+.selo-bloco:empty { display: none; }
+.selo {
+  display: inline-block; padding: 4px 16px; border-radius: var(--radius-btn);
+  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  letter-spacing: .04em; text-transform: uppercase;
+}
+.selo-ouro { background: var(--selo-ouro-bg); color: var(--selo-ouro); }
+.selo-prata { background: var(--selo-prata-bg); color: var(--selo-prata); }
+.selo-bronze { background: var(--selo-bronze-bg); color: var(--selo-bronze); }
+.selo-sem-selo { background: var(--selo-sem-bg); color: var(--selo-sem); }
+.selo-linha, .selo-queda { font-size: 16px; margin: 16px 0 0; max-width: 60ch; }
+.hero .selo-linha, .hero .selo-queda { color: #E8EFF7; }
+.hero .selo-linha strong, .hero .selo-queda strong { color: #fff; }
+.selo-queda { margin-top: 8px; }
+
 .hero h1 {
   font-size: clamp(32px, 4.4vw, 48px); line-height: 1.15;
   margin: 0 0 16px; letter-spacing: -.02em;
@@ -472,6 +495,9 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
   .hero .lede { color: var(--content-secondary) !important; font-size: 11pt; }
   .hero .lede strong { color: var(--content-primary) !important; }
   .link-claro { color: var(--primary-500) !important; }
+  .selo { font-size: 13pt; }
+  .hero .selo-linha, .hero .selo-queda { color: var(--content-secondary) !important; font-size: 10pt; }
+  .hero .selo-linha strong, .hero .selo-queda strong { color: var(--content-primary) !important; }
 
   /* Anel da nota: traco e texto brancos ficariam invisiveis no papel */
   .score .ring circle:first-of-type { stroke: var(--bg-subtle) !important; }

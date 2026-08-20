@@ -1431,6 +1431,88 @@
       "SC",
       "SE"
     ],
+    "selos": {
+      "rotulos": {
+        "ouro": "Selo Ouro",
+        "prata": "Selo Prata",
+        "bronze": "Selo Bronze",
+        "sem-selo": "Sem selo"
+      },
+      "ordem": [
+        "ouro",
+        "prata",
+        "bronze",
+        "sem-selo"
+      ],
+      "faixas": {
+        "ouro": {
+          "qtd": 8,
+          "ufs": [
+            "GO",
+            "MG",
+            "MT",
+            "PE",
+            "PI",
+            "RJ",
+            "RS",
+            "TO"
+          ],
+          "menor": 93.4722,
+          "maior": 100.0
+        },
+        "prata": {
+          "qtd": 4,
+          "ufs": [
+            "AC",
+            "CE",
+            "ES",
+            "SP"
+          ],
+          "menor": 82.4799,
+          "maior": 88.5
+        },
+        "bronze": {
+          "qtd": 3,
+          "ufs": [
+            "BA",
+            "MS",
+            "RO"
+          ],
+          "menor": 74.809,
+          "maior": 79.6326
+        },
+        "sem-selo": {
+          "qtd": 11,
+          "ufs": [
+            "AL",
+            "AM",
+            "AP",
+            "DF",
+            "MA",
+            "PA",
+            "PB",
+            "RN",
+            "RR",
+            "SC",
+            "SE"
+          ],
+          "menor": 14.1667,
+          "maior": 67.8354
+        }
+      },
+      "ms": "bronze",
+      "ms_2025": {
+        "selo": "prata",
+        "pontos": 87.33,
+        "variacao_percentual": -14.34,
+        "observacao": "Em 2025 MS alcançou o Selo Prata com 87,33 pontos. A queda para 74,81 em 2026 representa redução de 14,34%, conforme registrado pela ABEP-TIC."
+      },
+      "piso_sem_selo": 70,
+      "nao_participaram": [
+        "Paraná"
+      ],
+      "fonte": "Resultado oficial do Índice ABEP 2026 publicado pela ABEP-TIC em https://abep-tic.org.br/indice-abep-2026/. Os selos vêm de lá, não são calculados aqui — o script apenas confere que a pontuação apurada nos relatórios estaduais é coerente com o agrupamento publicado."
+    },
     "ranking": [
       {
         "uf": "PI",

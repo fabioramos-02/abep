@@ -1,0 +1,29 @@
+{
+  "_fonte": "Resultado oficial do Índice ABEP 2026 publicado pela ABEP-TIC em https://abep-tic.org.br/indice-abep-2026/. Os selos vêm de lá, não são calculados aqui — o script apenas confere que a pontuação apurada nos relatórios estaduais é coerente com o agrupamento publicado.",
+  "_participacao": "26 unidades federativas participaram do ciclo 2026. O Paraná optou por não participar desta edição.",
+  "_faixas": "A página não publica os cortes literais de Ouro e Prata; informa que as UFs sem selo ficaram abaixo de 70%. Os cortes de 90 e 80 pontos são inferência desta análise a partir do agrupamento divulgado, e o script trava essa coerência.",
+  "ordem": ["ouro", "prata", "bronze", "sem-selo"],
+  "rotulos": {
+    "ouro": "Selo Ouro",
+    "prata": "Selo Prata",
+    "bronze": "Selo Bronze",
+    "sem-selo": "Sem selo"
+  },
+  "piso_sem_selo": 70,
+  "nao_participaram": ["Paraná"],
+  "por_uf": {
+    "PI": "ouro", "GO": "ouro", "RS": "ouro", "PE": "ouro",
+    "MG": "ouro", "MT": "ouro", "RJ": "ouro", "TO": "ouro",
+    "ES": "prata", "AC": "prata", "CE": "prata", "SP": "prata",
+    "RO": "bronze", "BA": "bronze", "MS": "bronze",
+    "AL": "sem-selo", "PB": "sem-selo", "DF": "sem-selo", "MA": "sem-selo",
+    "SE": "sem-selo", "AP": "sem-selo", "RN": "sem-selo", "SC": "sem-selo",
+    "AM": "sem-selo", "PA": "sem-selo", "RR": "sem-selo"
+  },
+  "ms_2025": {
+    "selo": "prata",
+    "pontos": 87.33,
+    "variacao_percentual": -14.34,
+    "observacao": "Em 2025 MS alcançou o Selo Prata com 87,33 pontos. A queda para 74,81 em 2026 representa redução de 14,34%, conforme registrado pela ABEP-TIC."
+  }
+}

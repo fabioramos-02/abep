@@ -24,6 +24,42 @@ const ROTULO_STATUS = {
 const nf = (v, casas = 1) =>
   v.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 const pct = (v) => nf(v * 100, 1) + '%';
+/* ---------------- Selo do ciclo ---------------- */
+
+/* Bloco de abertura das duas paginas. O selo e atribuido pela ABEP-TIC, nao calculado
+   aqui: chega pronto em data/selos.json e so e exibido. */
+function blocoSelo({ selo, rotulos, ordem, contagem, qtd, ms2025, naoParticiparam = [] }) {
+  const curto = (k) => rotulos[k].replace(/^Selo\s+/, '');
+  const acima = ordem.slice(0, ordem.indexOf(selo));
+  const semSelo = contagem['sem-selo'] || 0;
+
+  const frase = acima.length
+    ? acima
+      .map((k, i) => (i === 0
+        ? `<strong>${plural(contagem[k], 'estado recebeu', 'estados receberam')} o ${rotulos[k]}</strong>`
+        : `${contagem[k]} ficaram com o ${curto(k)}`))
+      .join(' e ') + '. '
+    : '';
+
+  const queda = ms2025 && ms2025.selo !== selo
+    ? `<p class="selo-queda">Em 2025 o Estado tinha o <strong>${rotulos[ms2025.selo]}</strong>, com
+       ${nf(ms2025.pontos, 2)} pontos. A queda para o ${curto(selo)} representa
+       <strong>${nf(Math.abs(ms2025.variacao_percentual), 2)}% a menos</strong>.</p>`
+    : '';
+
+  return `
+    <span class="selo selo-${selo}">${rotulos[selo]}</span>
+    <p class="selo-linha">
+      ${frase}Mato Grosso do Sul está entre os
+      <strong>${contagem[selo]} que ficaram com o ${curto(selo)}</strong>.
+      Das ${qtd} unidades federativas avaliadas, ${semSelo} não receberam selo algum.${
+  naoParticiparam.length
+    ? ` O ${naoParticiparam.join(' e o ')} ${naoParticiparam.length === 1 ? 'não participou' : 'não participaram'} deste ciclo.`
+    : ''}
+    </p>
+    ${queda}`;
+}
+
 const plural = (n, um, muitos) => `${n} ${n === 1 ? um : muitos}`;
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 

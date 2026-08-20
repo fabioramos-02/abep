@@ -609,6 +609,18 @@ function recomendacoes(dados) {
 /* ---------------- Montagem ---------------- */
 
 function montar(dados) {
+  if (dados.nacional) {
+    const s = dados.nacional.selos;
+    document.getElementById('selo').innerHTML = blocoSelo({
+      selo: s.ms,
+      rotulos: s.rotulos,
+      ordem: s.ordem,
+      contagem: Object.fromEntries(s.ordem.map((k) => [k, s.faixas[k].qtd])),
+      qtd: dados.nacional.qtd_ufs,
+      ms2025: s.ms_2025,
+      naoParticiparam: s.nao_participaram,
+    });
+  }
   document.getElementById('score').innerHTML = anel(dados.resumo);
   visaoGeral(dados.resumo);
   porDimensao(dados);

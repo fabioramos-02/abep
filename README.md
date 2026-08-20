@@ -30,6 +30,22 @@ Abaixo da média nacional em 3 das 5 dimensões: Governança Digital, Usuários 
 **7 itens são difíceis para todos** — menos de 35% dos estados fizeram nota cheia neles. Ali MS
 acompanha o conjunto e cobrar a secretaria rende menos.
 
+### Selo do ciclo
+
+**Mato Grosso do Sul recebeu o Selo Bronze.** Em 2025 tinha o Selo Prata, com 87,33 pontos — a queda
+para 74,81 representa 14,34% a menos.
+
+| Selo | UFs | Faixa apurada |
+|------|----:|---------------|
+| Ouro | 8 | 93,47 a 100,00 — PI, GO, RS, PE, MG, MT, RJ, TO |
+| Prata | 4 | 82,48 a 88,50 — ES, AC, CE, SP |
+| **Bronze** | **3** | **74,81 a 79,63 — RO, BA, MS** |
+| Sem selo | 11 | abaixo de 70 |
+
+26 unidades federativas participaram; o Paraná não participou deste ciclo. Os selos são atribuídos
+pela ABEP-TIC e ficam em `data/selos.json` — não são calculados aqui. O script confere que a
+pontuação apurada nos relatórios estaduais separa os grupos na mesma ordem.
+
 ---
 
 ## O resultado em uma tabela
@@ -144,6 +160,9 @@ declarados como CSS custom properties no topo de `assets/styles.css`.
 **Situação de envio, órgão responsável e justificativa da avaliação:** `data/contexto.json`,
 transcrito do registro interno de acompanhamento do ciclo mantido pela equipe da SETDIG. Esse
 registro vive fora deste repositório e não acompanha a planilha, por isso foi versionado aqui.
+
+**Selos do ciclo:** `data/selos.json`, transcrito do resultado oficial publicado pela ABEP-TIC em
+<https://abep-tic.org.br/indice-abep-2026/>, incluindo a pontuação de MS em 2025.
 
 **Comparativo entre unidades federativas:** os 26 arquivos `Relatorio_Final_<UF>.xlsx` em `data/uf/`.
 Falta o Paraná — todo percentual da seção 5 é calculado sobre as 26 presentes, e a cobertura aparece
