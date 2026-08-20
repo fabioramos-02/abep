@@ -114,37 +114,58 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .hero .wrap {
   position: relative; z-index: 1;
-  padding-top: 56px; padding-bottom: 56px;
+  padding-top: 40px; padding-bottom: 40px;
   display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-  gap: 56px; align-items: center;
+  gap: 40px; align-items: center;
 }
 .eyebrow {
   font-family: var(--font-display); font-weight: 700; font-size: 12px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--primary-200);
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
+/* Entrada da capa: um unico movimento encadeado, do rotulo ao botao, para o olho
+   percorrer a hierarquia na ordem certa e parar na acao. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .eyebrow, .hero .selo-bloco, .hero h1, .hero .lede,
+  .hero .acoes, .hero .acoes-nota, .hero .score {
+    animation: rise .55s cubic-bezier(.22, .61, .36, 1) both;
+  }
+  .hero .selo-bloco { animation-delay: 70ms; }
+  .hero h1 { animation-delay: 140ms; }
+  .hero .lede { animation-delay: 210ms; }
+  .hero .acoes { animation-delay: 280ms; }
+  .hero .acoes-nota { animation-delay: 350ms; }
+  .hero .score { animation-delay: 200ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
 /* ---------- Selo do ciclo ---------- */
 .selo-bloco { margin: 0 0 24px; }
 .selo-bloco:empty { display: none; }
 .selo {
   display: inline-block; padding: 4px 16px; border-radius: var(--radius-btn);
-  font-family: var(--font-display); font-weight: 800; font-size: 18px;
+  font-family: var(--font-display); font-weight: 800; font-size: 16px;
   letter-spacing: .04em; text-transform: uppercase;
 }
 .selo-ouro { background: var(--selo-ouro-bg); color: var(--selo-ouro); }
 .selo-prata { background: var(--selo-prata-bg); color: var(--selo-prata); }
 .selo-bronze { background: var(--selo-bronze-bg); color: var(--selo-bronze); }
 .selo-sem-selo { background: var(--selo-sem-bg); color: var(--selo-sem); }
-.selo-linha, .selo-queda { font-size: 16px; margin: 16px 0 0; max-width: 60ch; }
+.selo-linha, .selo-queda { font-size: 15px; margin: 12px 0 0; max-width: 64ch; }
+.hero .selo-bloco { margin-bottom: 20px; }
+.hero .selo-linha, .hero .selo-queda { line-height: 1.4; }
 .hero .selo-linha, .hero .selo-queda { color: #E8EFF7; }
 .hero .selo-linha strong, .hero .selo-queda strong { color: #fff; }
 .selo-queda { margin-top: 8px; }
 
 .hero h1 {
-  font-size: clamp(32px, 4.4vw, 48px); line-height: 1.15;
+  font-size: clamp(28px, 3.6vw, 42px); line-height: 1.12;
   margin: 0 0 16px; letter-spacing: -.02em;
 }
-.hero .lede { font-size: 18px; color: #E8EFF7; margin: 0; max-width: 56ch; }
+.hero .lede { font-size: 17px; color: #E8EFF7; margin: 0; max-width: 60ch; }
 .hero .lede strong { color: #fff; }
 
 .score { text-align: center; }
@@ -429,6 +450,10 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
 .achado li strong { color: var(--content-primary); }
 
 @media (max-width: 720px) {
+  .abas .wrap { flex-direction: column; gap: 0; }
+  .aba { border-bottom-width: 2px; padding: 12px 16px; }
+  .acoes { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; }
   .sumario ol { gap: 8px 16px; padding: 8px 0; }
   .item-perda { margin-left: 0; }
 }
@@ -455,15 +480,75 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
    é parte da entrega, não um extra.
    ============================================================ */
 
-.btn-imprimir {
-  display: inline-flex; align-items: center; gap: 8px;
-  margin-top: 24px; padding: 0 16px; height: 40px;
-  background: #fff; color: var(--primary-500);
-  border: 2px solid #fff; border-radius: var(--radius-btn);
-  font-family: var(--font-body); font-size: 14px; font-weight: 700;
-  cursor: pointer; transition: background 150ms ease, color 150ms ease;
+/* ---------- Botoes ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 24px;
+  border-radius: var(--radius-btn); border: 2px solid transparent;
+  font-family: var(--font-body); font-size: 16px; font-weight: 700;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease,
+              transform 160ms ease, box-shadow 160ms ease;
 }
-.btn-imprimir:hover { background: transparent; color: #fff; }
+.btn-seta { flex: none; transition: transform 160ms ease; }
+.btn:hover .btn-seta { transform: translateX(4px); }
+.btn:active { transform: translateY(1px); }
+
+/* Sobre o azul da capa: o primario e a unica superficie branca solida da area,
+   entao a acao principal e a primeira coisa que o olho encontra. */
+.btn-primario {
+  background: #fff; color: var(--primary-600); border-color: #fff;
+  box-shadow: var(--shadow-4);
+}
+.btn-primario:hover { background: var(--primary-100); border-color: var(--primary-100); }
+.btn-secundario { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .45); }
+.btn-secundario:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.acoes-nota { font-size: 14px; color: var(--primary-100); margin: 12px 0 0; max-width: 60ch; }
+.so-impressao { display: none; }
+
+/* ---------- Abas de navegacao ---------- */
+.abas { background: var(--primary-700); border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.abas .wrap { display: flex; gap: 8px; padding-left: 24px; padding-right: 24px; }
+.aba {
+  flex: 1 1 0; min-width: 0;
+  padding: 16px 24px 14px; border-bottom: 4px solid transparent;
+  color: var(--primary-200); text-decoration: none;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.aba:hover { background: rgba(255, 255, 255, .06); color: #fff; }
+.aba-nome {
+  display: block; font-family: var(--font-display); font-weight: 700; font-size: 18px;
+}
+.aba-desc { display: block; font-size: 13px; margin-top: 2px; }
+.aba[aria-current="page"] {
+  color: #fff; border-bottom-color: #fff; background: rgba(255, 255, 255, .08);
+}
+.aba[aria-current="page"] .aba-desc { color: var(--primary-100); }
+
+/* ---------- Chamada de encerramento do painel ---------- */
+.proximo {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 32px; margin: 56px 0; padding: 40px;
+  background: var(--primary-500); color: #fff; border-radius: var(--radius-card);
+}
+.proximo > div { flex: 1 1 380px; }
+.proximo .proximo-rotulo {
+  font-family: var(--font-display); font-weight: 700; font-size: 12px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--primary-200); margin: 0 0 8px;
+}
+.proximo h2 { color: #fff; margin-bottom: 16px; }
+.proximo p { color: #E8EFF7; margin: 0; max-width: 62ch; }
+.proximo .btn-primario { color: var(--primary-600); }
+
+/* Ajustes de tela estreita para os blocos definidos acima - precisam vir depois
+   deles na cascata para valer. */
+@media (max-width: 720px) {
+  .proximo { padding: 24px; margin: 32px 0; gap: 24px; }
+  .proximo h2 { font-size: 24px; }
+  .proximo .btn { width: 100%; }
+}
 
 @page {
   size: A4 portrait;
@@ -478,12 +563,33 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
   html { scroll-behavior: auto; }
   body { font-size: 10.5pt; line-height: 1.4; background: #fff; }
 
+  /* A margem fisica quem da e o @page. Zerar o recuo lateral alinha tudo na mesma
+     coluna e devolve largura util para as tabelas. */
+  .wrap { max-width: none; padding-left: 0; padding-right: 0; }
+
   /* Controles de tela nao existem no papel */
-  .skip, .sumario, .filters, .btn-imprimir, .count { display: none !important; }
+  .skip, .sumario, .filters, .btn, .acoes, .count { display: none !important; }
+  /* No papel o link vira endereco escrito, senao a referencia se perde */
+  .so-impressao { display: block; font-size: 9.5pt; color: var(--content-secondary) !important; margin: 4mm 0 0; }
+  .so-impressao strong { color: var(--primary-500) !important; }
+  .acoes-nota { color: var(--content-secondary) !important; font-size: 9.5pt; }
+  /* A aba ativa vira etiqueta do documento; a outra nao interessa no papel */
+  /* A aba ativa alinha com o resto do conteudo, nao com a margem da folha */
+  .abas { background: #fff !important; border-bottom: 0; }
+  .abas .wrap { padding-left: 0; padding-right: 0; }
+  .aba { display: none; }
+  .aba[aria-current="page"] { display: block; background: none !important; padding: 3mm 0 2mm; border: 0; }
+  .aba[aria-current="page"] .aba-nome { color: var(--primary-500) !important; font-size: 11pt; }
+  .aba[aria-current="page"] .aba-desc { color: var(--content-secondary) !important; font-size: 9pt; }
+  .proximo {
+    background: #fff !important; color: var(--content-primary) !important;
+    border: 2px solid var(--primary-500); padding: 5mm; margin: 6mm 0; break-inside: avoid;
+  }
+  .proximo h2, .proximo p, .proximo .proximo-rotulo { color: var(--content-primary) !important; }
 
   /* Faixa institucional: mantem o azul, a marca do Estado e branca e so aparece sobre ele */
   .gov { border-bottom-width: 2px; }
-  .gov .wrap { min-height: 0; padding: 6mm 0; }
+  .gov .wrap { min-height: 0; padding-top: 5mm; padding-bottom: 5mm; }
   .logo-ms { height: 14mm; }
 
   /* Capa: fundo escuro vira claro para economizar tinta e manter legibilidade */
@@ -493,7 +599,7 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
     border-bottom: 2px solid var(--primary-500); overflow: visible !important;
   }
   .hero::after { display: none; }
-  .hero .wrap { padding: 8mm 0; gap: 8mm; break-after: page; }
+  .hero .wrap { padding-top: 6mm; padding-bottom: 6mm; gap: 8mm; break-after: page; }
   .hero h1 { font-size: 22pt; }
   .eyebrow { color: var(--primary-500) !important; }
   .hero .lede { color: var(--content-secondary) !important; font-size: 11pt; }
@@ -571,7 +677,7 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
   /* O painel é resumo: seção por página gastaria papel à toa. As seções fluem uma
      atrás da outra e só a tabela completa, que é anexo, começa em página nova.
      Na análise executiva a regra continua sendo uma seção por página. */
-  .painel .hero .wrap { break-after: auto; padding-bottom: 6mm; }
+  .painel .hero .wrap { break-after: auto; }
   .painel main > section { break-before: auto; padding: 6mm 0 0; }
   .painel main > section + section { border-top: 1px solid var(--border-default); }
   .painel main > section:last-of-type { break-before: page; border-top: 0; }

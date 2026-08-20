@@ -52,11 +52,18 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
    (largura útil do A4 retrato). As duas páginas paginam diferente: `analise.html` usa uma seção
    por página; `index.html` leva `class="painel"` no `<body>` e as seções fluem, com só a tabela
    das 44 exigências começando em página nova — é resumo, não relatório longo.
-7. **Ordem de dimensão é hierárquica, não por desempenho.** Gráficos, tabelas e cards seguem
+7. **Navegação entre os dois documentos é obrigatória e redundante.** A barra `.abas` fica no topo
+   das duas páginas, com `aria-current="page"` na atual. Na capa, a ação principal é um botão
+   sólido branco (`.btn-primario`) — link sublinhado dentro de parágrafo não é encontrado por quem
+   só bate o olho, foi exatamente o problema relatado. O painel ainda fecha com o card `.proximo`
+   apontando para a análise. Três caminhos: aba, botão, card. Não reduzir para um.
+8. **A ação principal precisa caber acima da dobra.** O botão da capa termina a ~730px do topo,
+   visível em janela de 768px. Ao acrescentar coisa na capa, medir de novo antes de commitar.
+9. **Ordem de dimensão é hierárquica, não por desempenho.** Gráficos, tabelas e cards seguem
    Dimensão I → V. Ranking por pontuação só no texto que interpreta o gráfico.
-8. **Toda seção entrega a conclusão em texto antes do gráfico** (elemento `.anchor`). O gráfico
+10. **Toda seção entrega a conclusão em texto antes do gráfico** (elemento `.anchor`). O gráfico
    ilustra a frase; a frase não é legenda do gráfico.
-9. **Limitação do dado fica explícita.** Ver o tratamento do item 4.5 — classificado como
+11. **Limitação do dado fica explícita.** Ver o tratamento do item 4.5 — classificado como
    "Evidência Comprovada" na planilha, mas com pontuação 0. Não silenciar divergências assim.
 
 ## Selo do ciclo

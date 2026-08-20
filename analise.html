@@ -27,6 +27,19 @@
     </div>
   </div>
 
+  <nav class="abas" aria-label="Documentos do ciclo 2026">
+    <div class="wrap">
+      <a class="aba" href="index.html">
+        <span class="aba-nome">Painel</span>
+        <span class="aba-desc">O resultado em números</span>
+      </a>
+      <a class="aba" href="analise.html" aria-current="page">
+        <span class="aba-nome">Análise executiva</span>
+        <span class="aba-desc">Por órgão, item a item, o que recuperar</span>
+      </a>
+    </div>
+  </nav>
+
   <header class="hero">
     <div class="wrap">
       <div>
@@ -36,11 +49,13 @@
         <p class="lede">Leitura completa do resultado: situação de cada uma das 44 exigências, desempenho
           das 5 dimensões, responsabilidade por órgão, posição de MS entre os estados e o que dá para
           recuperar com menos esforço.
-          <a class="link-claro" href="index.html">Ver o painel resumido</a>.
         </p>
-        <button type="button" class="btn-imprimir" onclick="window.print()">
-          Imprimir ou salvar em PDF
-        </button>
+        <div class="acoes">
+          <button type="button" class="btn btn-primario" onclick="window.print()">
+            Imprimir ou salvar em PDF
+          </button>
+          <a class="btn btn-secundario" href="index.html">Ver o painel resumido</a>
+        </div>
       </div>
       <div class="score" id="score"></div>
     </div>

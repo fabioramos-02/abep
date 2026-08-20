@@ -27,6 +27,19 @@
     </div>
   </div>
 
+  <nav class="abas" aria-label="Documentos do ciclo 2026">
+    <div class="wrap">
+      <a class="aba" href="index.html" aria-current="page">
+        <span class="aba-nome">Painel</span>
+        <span class="aba-desc">O resultado em números</span>
+      </a>
+      <a class="aba" href="analise.html">
+        <span class="aba-nome">Análise executiva</span>
+        <span class="aba-desc">Por órgão, item a item, o que recuperar</span>
+      </a>
+    </div>
+  </nav>
+
   <header class="hero">
     <div class="wrap">
       <div>
@@ -36,11 +49,22 @@
         <p class="lede">O Estado foi avaliado em <strong>44 exigências</strong> distribuídas em 5 dimensões.
           Fechou o ciclo com <strong>74,8 de 100 pontos</strong>. Quase dois terços de tudo que ficou de fora
           vem de <strong>7 exigências que não pontuaram nada</strong>.</p>
-        <p class="lede"><a class="link-claro" href="analise.html">Ver a análise executiva completa</a> —
-          responsabilidade por órgão, justificativa item a item e o que dá para recuperar.</p>
-        <button type="button" class="btn-imprimir" onclick="window.print()">
-          Imprimir ou salvar em PDF
-        </button>
+        <div class="acoes">
+          <a class="btn btn-primario" href="analise.html">
+            Ver a análise executiva completa
+            <svg class="btn-seta" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+              <path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <button type="button" class="btn btn-secundario" onclick="window.print()">
+            Imprimir ou salvar em PDF
+          </button>
+        </div>
+        <p class="acoes-nota">Na análise executiva: responsabilidade por órgão, justificativa da
+          avaliação item a item, posição de MS entre os estados e o que dá para recuperar.</p>
+        <p class="so-impressao">A análise executiva completa está em
+          <strong>fabioramos-02.github.io/abep/analise.html</strong></p>
       </div>
       <div class="score" id="score"></div>
     </div>
@@ -162,6 +186,23 @@
         </table>
       </div>
     </section>
+
+    <aside class="proximo">
+      <div>
+        <p class="proximo-rotulo">Próximo passo</p>
+        <h2>Por que o Estado perdeu cada ponto</h2>
+        <p>A análise executiva abre item a item: o que a avaliação registrou como pendência, qual órgão
+          responde por ela, onde MS está atrás dos demais estados e quais ações recuperam mais pontuação
+          com menos esforço.</p>
+      </div>
+      <a class="btn btn-primario" href="analise.html">
+        Abrir a análise executiva
+        <svg class="btn-seta" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+          <path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </aside>
 
   </main>
 

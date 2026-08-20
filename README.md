@@ -4,7 +4,7 @@ Página de leitura do resultado final de MS no ciclo **2026** da avaliação nac
 serviços públicos digitais (IOSPD/ABEPTIC): nota por dimensão, o que ficou zerado e onde os
 pontos foram perdidos.
 
-Duas páginas:
+Duas páginas, ligadas por abas fixas no topo:
 
 | Página | Para quem | O que responde |
 |--------|-----------|----------------|
