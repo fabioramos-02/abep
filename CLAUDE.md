@@ -49,7 +49,9 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
    `.bar` tem animação `scaleX` que pode imprimir barra vazia, por isso `animation: none` na
    impressão. Fundos chapados exigem `print-color-adjust: exact`. Para testar sem imprimir: no
    console, trocar o `mediaText` da regra `print` para `screen` e medir com a viewport em ~720px
-   (largura útil do A4 retrato).
+   (largura útil do A4 retrato). As duas páginas paginam diferente: `analise.html` usa uma seção
+   por página; `index.html` leva `class="painel"` no `<body>` e as seções fluem, com só a tabela
+   das 44 exigências começando em página nova — é resumo, não relatório longo.
 7. **Ordem de dimensão é hierárquica, não por desempenho.** Gráficos, tabelas e cards seguem
    Dimensão I → V. Ranking por pontuação só no texto que interpreta o gráfico.
 8. **Toda seção entrega a conclusão em texto antes do gráfico** (elemento `.anchor`). O gráfico

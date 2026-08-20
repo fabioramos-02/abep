@@ -487,7 +487,11 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
   .logo-ms { height: 14mm; }
 
   /* Capa: fundo escuro vira claro para economizar tinta e manter legibilidade */
-  .hero { background: #fff !important; color: var(--content-primary) !important; border-bottom: 2px solid var(--primary-500); }
+  /* overflow hidden em bloco que atravessa quebra de pagina pode cortar conteudo */
+  .hero {
+    background: #fff !important; color: var(--content-primary) !important;
+    border-bottom: 2px solid var(--primary-500); overflow: visible !important;
+  }
   .hero::after { display: none; }
   .hero .wrap { padding: 8mm 0; gap: 8mm; break-after: page; }
   .hero h1 { font-size: 22pt; }
@@ -563,4 +567,16 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
 
   /* Itens ocultos por filtro continuam ocultos: imprime o que está na tela */
   [hidden] { display: none !important; }
+
+  /* O painel é resumo: seção por página gastaria papel à toa. As seções fluem uma
+     atrás da outra e só a tabela completa, que é anexo, começa em página nova.
+     Na análise executiva a regra continua sendo uma seção por página. */
+  .painel .hero .wrap { break-after: auto; padding-bottom: 6mm; }
+  .painel main > section { break-before: auto; padding: 6mm 0 0; }
+  .painel main > section + section { border-top: 1px solid var(--border-default); }
+  .painel main > section:last-of-type { break-before: page; border-top: 0; }
+  .painel .zeros { grid-template-columns: repeat(3, 1fr); }
+  .painel .zero { padding: 3mm; }
+  .painel .zero p.q { font-size: 9pt; margin: 2mm 0 3mm; }
+  .painel .zero .lost { font-size: 13pt; }
 }

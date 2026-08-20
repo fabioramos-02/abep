@@ -142,9 +142,16 @@ Pré-requisito no repositório: **Settings → Pages → Source: GitHub Actions*
 
 ## Impressão
 
-As duas páginas têm folha de impressão própria e um botão **Imprimir ou salvar em PDF** no topo.
-No papel: A4 retrato, uma seção por página, cabeçalho de tabela repetido a cada quebra, cards e
-linhas sem corte no meio, capa em fundo claro e controles de tela (sumário, filtros, botão) ocultos.
+As duas páginas têm folha de impressão e um botão **Imprimir ou salvar em PDF** no topo.
+No papel: A4 retrato, cabeçalho de tabela repetido a cada quebra, cards e linhas sem corte no meio,
+capa em fundo claro e controles de tela (sumário, filtros, botão) ocultos.
+
+A paginação difere conforme o documento. A **análise executiva** usa uma seção por página. O
+**painel** é resumo: as seções fluem uma atrás da outra e só a tabela das 44 exigências começa em
+página nova, o que evita gastar folha com espaço em branco.
+
+Se a impressão sair desalinhada, recarregue com `Ctrl+Shift+R` antes: o navegador guarda o CSS
+antigo em cache e imprime com ele.
 
 ## Padrão visual
 
