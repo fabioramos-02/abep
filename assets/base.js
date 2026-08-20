@@ -24,6 +24,7 @@ const ROTULO_STATUS = {
 const nf = (v, casas = 1) =>
   v.toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 const pct = (v) => nf(v * 100, 1) + '%';
+const plural = (n, um, muitos) => `${n} ${n === 1 ? um : muitos}`;
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 /* ---------------- Grafico de barras horizontais ---------------- */

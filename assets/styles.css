@@ -425,3 +425,116 @@ td small, th small { font-weight: 400; color: var(--content-tertiary); }
 .marca-dificil { background: #CDEBFF; color: #011F33; margin-top: 4px; }
 #tab-nacional-ind tr[hidden] { display: none; }
 .achado-nacional { border-top-color: var(--info); }
+
+/* ============================================================
+   Impressão e exportação em PDF
+   O relatório é levado impresso para reunião, então esta folha
+   é parte da entrega, não um extra.
+   ============================================================ */
+
+.btn-imprimir {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 24px; padding: 0 16px; height: 40px;
+  background: #fff; color: var(--primary-500);
+  border: 2px solid #fff; border-radius: var(--radius-btn);
+  font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: background 150ms ease, color 150ms ease;
+}
+.btn-imprimir:hover { background: transparent; color: #fff; }
+
+@page {
+  size: A4 portrait;
+  margin: 14mm 12mm;
+}
+
+@media print {
+  /* Fundos e cores chapadas precisam ser impressos: sem isso as barras dos
+     graficos e a faixa institucional saem em branco. */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  html { scroll-behavior: auto; }
+  body { font-size: 10.5pt; line-height: 1.4; background: #fff; }
+
+  /* Controles de tela nao existem no papel */
+  .skip, .sumario, .filters, .btn-imprimir, .count { display: none !important; }
+
+  /* Faixa institucional: mantem o azul, a marca do Estado e branca e so aparece sobre ele */
+  .gov { border-bottom-width: 2px; }
+  .gov .wrap { min-height: 0; padding: 6mm 0; }
+  .logo-ms { height: 14mm; }
+
+  /* Capa: fundo escuro vira claro para economizar tinta e manter legibilidade */
+  .hero { background: #fff !important; color: var(--content-primary) !important; border-bottom: 2px solid var(--primary-500); }
+  .hero::after { display: none; }
+  .hero .wrap { padding: 8mm 0; gap: 8mm; break-after: page; }
+  .hero h1 { font-size: 22pt; }
+  .eyebrow { color: var(--primary-500) !important; }
+  .hero .lede { color: var(--content-secondary) !important; font-size: 11pt; }
+  .hero .lede strong { color: var(--content-primary) !important; }
+  .link-claro { color: var(--primary-500) !important; }
+
+  /* Anel da nota: traco e texto brancos ficariam invisiveis no papel */
+  .score .ring circle:first-of-type { stroke: var(--bg-subtle) !important; }
+  .score .ring circle + circle { stroke: var(--primary-500) !important; }
+  .score .ring text { fill: var(--content-primary) !important; }
+  .score .ring text + text { fill: var(--content-secondary) !important; }
+  .score .caption { color: var(--content-secondary) !important; }
+
+  /* Cada seção começa em página nova e o título nunca fica órfão no rodapé */
+  main > section { break-before: page; padding: 0 0 8mm; border-top: 0; }
+  main > section:first-of-type { break-before: auto; }
+  .sec-head { break-after: avoid; margin-bottom: 6mm; }
+  h2, h3 { break-after: avoid; }
+  h2 { font-size: 16pt; }
+  h3, .sub-titulo { font-size: 12pt; margin-top: 6mm; }
+  .anchor { font-size: 10.5pt; }
+
+  /* Blocos que não podem ser cortados no meio */
+  .kpi, .zero, .item, .achado, .dim-card, .note, .lacuna, .dim-list li,
+  figure, tr { break-inside: avoid; }
+
+  /* Grade compacta: 4 KPIs lado a lado cabem na largura útil do A4 */
+  .kpis { grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+  .kpi { padding: 4mm; box-shadow: none; }
+  .kpi .num { font-size: 20pt; }
+  .kpi .label, .kpi .hint { font-size: 8.5pt; }
+  .zeros, .achados, .dim-cards { grid-template-columns: repeat(2, 1fr); gap: 4mm; }
+  .zero, .achado, .dim-card, .item { padding: 4mm; }
+
+  /* Tabelas: a causa da quebra na impressão era o min-width de 720px, que existe só
+     para forçar a rolagem lateral na tela. No papel não há rolagem: a tabela precisa
+     caber na largura útil, com o texto quebrando dentro da célula. */
+  .table-scroll { overflow: visible !important; border: 0; }
+  table {
+    width: 100% !important; min-width: 0 !important;
+    font-size: 8.5pt; table-layout: fixed;
+  }
+  thead { display: table-header-group; }
+  tfoot { display: table-footer-group; }
+  thead th { position: static !important; }
+  th, td { padding: 1.5mm 2mm; word-wrap: break-word; overflow-wrap: anywhere; }
+  td.n, th.n, td.code { white-space: normal !important; }
+  .marca, .tag { white-space: normal !important; font-size: 7.5pt; }
+  .marca { display: block; margin-bottom: 1mm; }
+  .minibar { width: 50px; }
+  caption { font-size: 8.5pt; }
+
+  /* Gráficos: sem animação, senão a barra pode sair com largura zero */
+  .bar { animation: none !important; transform: none !important; }
+  .chart { max-width: 100%; }
+  .chart .lbl, .chart .val { font-size: 13px; }
+
+  /* Ligações e rodapé */
+  a { text-decoration: none; color: var(--content-primary); }
+  footer {
+    break-before: auto; margin-top: 8mm; padding: 6mm 0 0;
+    background: #fff !important; color: var(--content-secondary) !important;
+    border-top: 2px solid var(--primary-500);
+  }
+  footer strong, footer a { color: var(--content-primary) !important; }
+  .plaque { padding: 0; background: transparent; }
+  .plaque img { width: 45mm; }
+
+  /* Itens ocultos por filtro continuam ocultos: imprime o que está na tela */
+  [hidden] { display: none !important; }
+}

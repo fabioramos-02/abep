@@ -43,9 +43,18 @@ Nunca escrever "Secretaria de Estado de Governo Digital".
    são sempre chamadas de **Dimensão I a V** (algarismo romano + nome), porque é assim que a
    avaliação as identifica e é assim que os pontos focais das secretarias se referem a elas.
    O rótulo é montado por `rotuloDim()` em `assets/app.js`; não trocar por "área avaliada".
-6. **Toda seção entrega a conclusão em texto antes do gráfico** (elemento `.anchor`). O gráfico
+6. **O relatório é impresso.** A folha `@media print` no fim de `assets/styles.css` faz parte da
+   entrega. Duas armadilhas já corrigidas, não reintroduzir: `table { min-width: 720px }` existe só
+   para forçar rolagem lateral na tela e precisa ser zerado no papel, senão a tabela é cortada; e
+   `.bar` tem animação `scaleX` que pode imprimir barra vazia, por isso `animation: none` na
+   impressão. Fundos chapados exigem `print-color-adjust: exact`. Para testar sem imprimir: no
+   console, trocar o `mediaText` da regra `print` para `screen` e medir com a viewport em ~720px
+   (largura útil do A4 retrato).
+7. **Ordem de dimensão é hierárquica, não por desempenho.** Gráficos, tabelas e cards seguem
+   Dimensão I → V. Ranking por pontuação só no texto que interpreta o gráfico.
+8. **Toda seção entrega a conclusão em texto antes do gráfico** (elemento `.anchor`). O gráfico
    ilustra a frase; a frase não é legenda do gráfico.
-7. **Limitação do dado fica explícita.** Ver o tratamento do item 4.5 — classificado como
+9. **Limitação do dado fica explícita.** Ver o tratamento do item 4.5 — classificado como
    "Evidência Comprovada" na planilha, mas com pontuação 0. Não silenciar divergências assim.
 
 ## Números do ciclo 2026 (para conferência rápida)

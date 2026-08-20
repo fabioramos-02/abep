@@ -93,6 +93,8 @@ function visaoGeral(r) {
 
 function porDimensao(dados) {
   const { resumo, dimensoes } = dados;
+  // dimensoes ja vem na ordem I a V. O ranking so serve ao texto - o grafico segue a
+  // hierarquia da avaliacao, que e como os pontos focais leem o relatorio.
   const ordenadas = [...dimensoes].sort((a, b) => b.aproveitamento - a.aproveitamento);
   const melhor = ordenadas[0], pior = ordenadas[ordenadas.length - 1];
   const maiorPerda = [...dimensoes].sort((a, b) => b.perda - a.perda)[0];
@@ -105,9 +107,10 @@ function porDimensao(dados) {
     `${nf(resumo.perda, 2)} pontos perdidos, ${pct(maiorPerda.share_perda)} do total.`;
 
   document.getElementById('chart-aproveitamento').innerHTML = barras({
-    itens: ordenadas.map((d) => ({
+    itens: dimensoes.map((d) => ({
       rotulo: rotuloDim(d.numero, d.nome),
-      detalhe: `${d.cheios} integrais · ${d.parciais} parciais · ${d.zerados} zerados · perde ${nf(d.perda, 2)} pts`,
+      detalhe: `${plural(d.cheios, 'integral', 'integrais')} · ${plural(d.parciais, 'parcial', 'parciais')}`
+        + ` · ${plural(d.zerados, 'zerado', 'zerados')} · perde ${nf(d.perda, 2)} pts`,
       valor: d.aproveitamento,
       cor: corPorAproveitamento(d.aproveitamento),
     })),
@@ -116,7 +119,7 @@ function porDimensao(dados) {
     formata: (v) => pct(v),
     referencia: { valor: resumo.total / resumo.maximo, rotulo: `média do Estado ${pct(resumo.total / resumo.maximo)}` },
     aria: 'Desempenho de cada dimensão: ' +
-      ordenadas.map((d) => `${rotuloDim(d.numero, d.nome)}, ${pct(d.aproveitamento)}`).join('; ') + '.',
+      dimensoes.map((d) => `${rotuloDim(d.numero, d.nome)}, ${pct(d.aproveitamento)}`).join('; ') + '.',
   });
 
   document.getElementById('tab-dim').innerHTML = dimensoes.map((d) => `

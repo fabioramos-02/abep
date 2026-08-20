@@ -124,6 +124,12 @@ se o JSON versionado bate com a fonte, depois publica o repositório inteiro no 
 
 Pré-requisito no repositório: **Settings → Pages → Source: GitHub Actions**.
 
+## Impressão
+
+As duas páginas têm folha de impressão própria e um botão **Imprimir ou salvar em PDF** no topo.
+No papel: A4 retrato, uma seção por página, cabeçalho de tabela repetido a cada quebra, cards e
+linhas sem corte no meio, capa em fundo claro e controles de tela (sumário, filtros, botão) ocultos.
+
 ## Padrão visual
 
 Design System MS.GOV v2.0.0 (SGD/SETDIG) — azul institucional `#004F9F`, títulos em Open Sans,
